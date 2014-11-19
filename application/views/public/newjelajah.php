@@ -45,7 +45,7 @@
 					'<p>'+n['sortdesc']+'</p>'+
 					'<p class="jelajah-detail">Penyelenggara '+n['penyelenggara']+' / '+n['mainkat']+'  / oleh <a href="'+n['authorlink']+'">'+n['oleh']+'</p>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-calendar"></span></p>'+
 					'<p class="value_total jelajah-value">'+
@@ -53,12 +53,17 @@
 					'</p>'+
 					'</center>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
+					'<center style="margin-top:20px">'+
+					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-star"></span></p>'+
+					'<p class="jelajah-value">'+n['rate']+'</p></center>'+
+					'</td>'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-eye-open"></span></p>'+
 					'<p class="jelajah-value">'+n['views']+'</p></center>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal">Rp</p>'+
 					'<p class="jelajah-value">'+
@@ -101,7 +106,7 @@
 					'<p>'+n['sortdesc']+'</p>'+
 					'<p class="jelajah-detail">Penyelenggara '+n['penyelenggara']+' / '+n['mainkat']+'  / oleh <a href="'+n['authorlink']+'">'+n['oleh']+'</p>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-calendar"></span></p>'+
 					'<p class="value_total jelajah-value">'+
@@ -109,12 +114,17 @@
 					'</p>'+
 					'</center>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
+					'<center style="margin-top:20px">'+
+					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-star"></span></p>'+
+					'<p class="jelajah-value">'+n['rate']+'</p></center>'+
+					'</td>'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-eye-open"></span></p>'+
 					'<p class="jelajah-value">'+n['views']+'</p></center>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal">Rp</p>'+
 					'<p class="jelajah-value">'+
@@ -155,7 +165,7 @@ error:function(){
 					'<p>'+n['sortdesc']+'</p>'+
 					'<p class="jelajah-detail">Penyelenggara '+n['penyelenggara']+' / '+n['mainkat']+'  / oleh <a href="'+n['authorlink']+'">'+n['oleh']+'</p>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-calendar"></span></p>'+
 					'<p class="value_total jelajah-value">'+
@@ -163,12 +173,17 @@ error:function(){
 					'</p>'+
 					'</center>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
+					'<center style="margin-top:20px">'+
+					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-star"></span></p>'+
+					'<p class="jelajah-value">'+n['rate']+'</p></center>'+
+					'</td>'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-eye-open"></span></p>'+
 					'<p class="jelajah-value">'+n['views']+'</p></center>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal">Rp</p>'+
 					'<p class="jelajah-value">'+
@@ -210,7 +225,7 @@ error:function(){
 					'<p>'+n['sortdesc']+'</p>'+
 					'<p class="jelajah-detail">Penyelenggara '+n['penyelenggara']+' / '+n['mainkat']+'  / oleh <a href="'+n['authorlink']+'">'+n['oleh']+'</p>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-calendar"></span></p>'+
 					'<p class="value_total jelajah-value">'+
@@ -218,12 +233,17 @@ error:function(){
 					'</p>'+
 					'</center>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
+					'<center style="margin-top:20px">'+
+					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-star"></span></p>'+
+					'<p class="jelajah-value">'+n['rate']+'</p></center>'+
+					'</td>'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-eye-open"></span></p>'+
 					'<p class="jelajah-value">'+n['views']+'</p></center>'+
 					'</td>'+
-					'<td style="width:100px">'+
+					'<td style="width:90px">'+
 					'<center style="margin-top:20px">'+
 					'<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal">Rp</p>'+
 					'<p class="jelajah-value">'+

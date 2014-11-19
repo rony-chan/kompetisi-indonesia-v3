@@ -59,6 +59,26 @@ class json extends base {
 				}
 				$id = $this-> ki_id_enc($k['id_kompetisi']);//enkripsi id kompetisi
 				$judul = str_replace(' ', '-', $k['judul']);
+				//start of rate
+				$query_rating = "SELECT SUM(rating) AS 'rating' FROM rating WHERE id_kompetisi = ?";
+				$query_rating = $this->db->query($query_rating,$k['id_kompetisi']);
+				$query_rating = $query_rating->row_array();
+				$total_rate =  $query_rating['rating']; //mendapatkan total rate
+				if(empty($total_rate)){
+					$total_rate = 0;
+				}
+				//cek total row
+				$query_row_rating = "SELECT * FROM rating WHERE id_kompetisi = ?";
+				$total_row = $this->db->query($query_row_rating,$k['id_kompetisi']);
+				$total_row = $total_row->num_rows();
+				if($total_row==0){
+					$total_row = 1;//because  0 division 0 = ~
+				}
+				//rating sekarang
+				$recent_rate = $total_rate / $total_row;
+				//konvert ke bilangan bulat
+				$recent_rate = round($recent_rate);
+				//end of rate
 				$data[] = array('id'=>$id,
 				'judul'=>$k['judul'],
 				'sortdesc'=>$k['sort'],
@@ -67,6 +87,7 @@ class json extends base {
 				'penyelenggara'=>$k['penyelenggara'],
 				'mainkat'=>$k['main_kat'],
 				'total'=>$this->ki_money_convert($k['total']),
+				'rate'=>$recent_rate,
 				'views'=>$k['views'],
 				'link'=>site_url('kompetisi/detail/'.$id.'/'.$judul),
 				'authorlink'=>site_url('publik/profile/'.$k['username'])
