@@ -148,7 +148,7 @@
 								<p><?php echo $sort?>...</p>
 								<p class="jelajah-detail">Penyelenggara  <?php echo  $li['penyelenggara']?> / <?php echo $li['main_kat']?>  / oleh <a href="<?php echo site_url('publik/profile/'.$li['username'])?>"><?php echo $li['username']?></p>
 							</td>
-							<td style="width:100px">
+							<td style="width:90px">
 								<center style="margin-top:20px">
 									<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-calendar"></span></p>
 									<p class="value_total jelajah-value">
@@ -161,12 +161,41 @@
 									</p>
 								</center>
 							</td>
-							<td style="width:100px">
+							<td style="width:90px">
+								<center style="margin-top:20px">
+								<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-star"></span></p>
+								<p class="jelajah-value">
+									<?php
+									//rating
+									//cek rating kompetisi di database
+									$query_rating = "SELECT SUM(rating) AS 'rating' FROM rating WHERE id_kompetisi = ?";
+									$query_rating = $this->db->query($query_rating,$li['id_kompetisi']);
+									$query_rating = $query_rating->row_array();
+									$total_rate =  $query_rating['rating']; //mendapatkan total rate
+									if(empty($total_rate)){
+										$total_rate = 0;
+									}
+									//cek total row
+									$query_row_rating = "SELECT * FROM rating WHERE id_kompetisi = ?";
+									$total_row = $this->db->query($query_row_rating,$li['id_kompetisi']);
+									$total_row = $total_row->num_rows();
+									if($total_row==0){
+										$total_row = 1;//because  0 division 0 = ~
+									}
+									//rating sekarang
+									$recent_rate = $total_rate / $total_row;
+									//konvert ke bilangan bulat
+									echo round($recent_rate);
+									//end of rating
+									?>
+								</p></center>
+							</td>
+							<td style="width:90px">
 								<center style="margin-top:20px">
 								<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal"><span class="glyphicon glyphicon-eye-open"></span></p>
 								<p class="jelajah-value"><?php echo $li['views'];?></p></center>
 							</td>
-							<td style="width:100px">
+							<td style="width:90px">
 								<center style="margin-top:20px">
 								<p class="jelajah-detail jelajah-ikon" class="value_hadiahtotal">Rp</p>
 									<p class="jelajah-value">
