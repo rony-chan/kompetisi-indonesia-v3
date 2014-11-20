@@ -161,7 +161,7 @@
 										<h3 style="width:50%"> <span class="glyphicon glyphicon-user"> </span><br/> Pasang dan Manajemen Kompetisi</h3><br/><br/>
 									</span>
 
-							<!-- LOGIN BIASA
+							LOGIN BIASA
 							<span class="col-md-6">
 								<form method="post" action="<?php echo site_url('publik/login')?>" role="form">
 								  <div class="form-group">
@@ -179,7 +179,7 @@
 								  </div>
 								  <input  type="submit" class="btn btn-default" value="Log in"/>
 								 </form>
-								</span> -->
+								</span>
 
 								<span class="col-md-6">
 									<p>login via :</p>
