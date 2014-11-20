@@ -18,7 +18,16 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+//cek development atau production database
+	switch (dirname(__FILE__)) {
+		case '/home/jarangpulang/project/git/kompetisi-indonesia-v3':
+			define('ENVIRONMENT', 'development');
+			break;
+		
+		default:
+			define('ENVIRONMENT', 'production');
+			break;
+	}
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
