@@ -156,12 +156,11 @@
 					<div class="modal-body">
 						<span class="row">
 							<span class="col-md-12 login-via">
-								<center>
+								<center><!-- 
 									<span class="col-md-6">
 										<h3 style="width:50%"> <span class="glyphicon glyphicon-user"> </span><br/> Pasang dan Manajemen Kompetisi</h3><br/><br/>
-									</span>
+									</span> -->
 
-							LOGIN BIASA
 							<span class="col-md-6">
 								<form method="post" action="<?php echo site_url('publik/login')?>" role="form">
 								  <div class="form-group">
@@ -174,7 +173,7 @@
 								  </div>
 								  <div class="checkbox">
 								    <label>
-								      <input type="checkbox"> Check me out
+								      <input type="checkbox"> Ingat saya
 								    </label>
 								  </div>
 								  <input  type="submit" class="btn btn-default" value="Log in"/>
@@ -182,10 +181,11 @@
 								</span>
 
 								<span class="col-md-6">
-									<p>login via :</p>
-									<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="http://kompetisiindonesia.com/images/icon/fb-20x20.png" alt="facebook login"/></span>Facebook</a>
-									<a class="btn-connect twitter"  href="<?php echo site_url('auth/twitter')?>"><span style="float:left"><img src="http://kompetisiindonesia.com/images/icon/twitter-20x20.png" alt="twitter login"/></span>Twitter</a>
-								</span>
+											<p>login via :</p>
+											<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/fb-20x20.png'); ?>" alt="facebook login"/></span>Facebook</a>
+											<a class="btn-connect twitter"  href="<?php echo site_url('auth/twitter')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/twitter-20x20.png'); ?>" alt="twitter login"/></span>Twitter</a>
+											<a class="btn-connect g"  href="<?php echo site_url('auth/twitter')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/g-20x20.png'); ?>" alt="google+ login"/></span>Google+</a>
+										</span>
 
 							</center>
 						</span>
