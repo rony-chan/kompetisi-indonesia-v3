@@ -98,25 +98,22 @@
 							$username = $this->session->userdata('username');
 							?>
 							<?php
-							if($this->session->userdata('id_user') != "") {
-								echo '
+							if($this->session->userdata('id_user') != ""):?>
 								<a href="#" >
-									<li style="padding:0 0 0 10px">								
-
+									<li style="padding:0 0 0 10px">			
 										<div class="dropdown pull-right">
-											<a data-toggle="dropdown" href="#"><img style="margin-right:5px;width:40px;height:40px" src="https://graph.facebook.com/'.$this->session->userdata('oauth_id').'/picture?return_ssl_resources=true" alt="kompetisi indonesia user"/>'.$this->session->userdata('username').'<span class="caret"></span></a>
+											<a data-toggle="dropdown" href="#"><img style="margin-right:5px;width:40px;height:40px" src="https://graph.facebook.com/<?php $this->session->userdata('oauth_id'); ?>/picture?return_ssl_resources=true" alt="kompetisi indonesia user"/><?php $this->session->userdata('username'); ?><span class="caret"></span></a>
 											<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-												<li style="width:100%;padding:0"><a href="'.site_url('publik/profile/'.$username).'" >View Profile</a></li>
-												<li style="width:100%;padding:0"><a href="'.site_url('dashboard').'" >Dasbor</a></li>
-												<li style="width:100%;padding:0"><a href="'.site_url('dashboard/profile').'" >Edit Profil</a></li>
-												<li style="width:100%;padding:0"><a href="'.site_url('publik/logout').'" >Logout</a></li>
+												<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/profile/'.$username); ?>" >View Profile</a></li>
+												<li style="width:100%;padding:0"><a href="<?php echo site_url('dashboard'); ?>" >Dasbor</a></li>
+												<li style="width:100%;padding:0"><a href="<?php echo site_url('dashboard/profile'); ?>" >Edit Profil</a></li>
+												<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/logout'); ?>" >Logout</a></li>
 											</ul>
 										</div>
 									</li></a>';
-								} else {
-									echo '<li><a href="#login" data-toggle="modal">Login</a></li>';
-								}
-								?>
+								<?php else: ?>
+									<li><a href="#login" data-toggle="modal">Login</a></li>
+								<?php endif; ?>
 								<li><a href="<?php echo site_url('pasangkompetisi')?>">Pasang</a></li>
 								<li><a href="<?php echo site_url('jelajah')?>">Jelajah</a></li>
 								<li><a href="<?php echo site_url('publik/read/TVRZPQ/Testimoni')?>">Testimoni</a></li>
