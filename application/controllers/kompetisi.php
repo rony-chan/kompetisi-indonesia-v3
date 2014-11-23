@@ -100,6 +100,7 @@ class kompetisi extends base {
 		$recent_rate = $total_rate / $total_row;
 		//konvert ke bilangan bulat
 		$data['recent_rate'] = round($recent_rate);
+		//end of rating
 
 		//jika ada user login
 		if(!empty($this->session->userdata('id_user'))) {
