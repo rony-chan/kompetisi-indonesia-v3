@@ -621,6 +621,13 @@ class super extends base {
 		$data['title'] = 'ads | ';
 		$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#adsx').addClass('active'); });</script>";
 		//start pagination 
+		//pagination set up
+		$this->load->library('pagination');
+		$config['per_page'] = 20;
+		$config['uri_segment'] = 4;
+		$config['num_link'] = 4;		
+		$config['page_query_string'] = TRUE;
+		$config['base_url'] = site_url().'/super/super/ads?act='.$this->input->get('act', TRUE);
 		$config['total_rows'] = $this->db->count_all('ads');//count all ads row
 		$uri = $this->uri->segment(4);
 		$this->pagination->initialize($config);

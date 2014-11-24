@@ -25,5 +25,13 @@ class ajax extends base {
 		$this->load->view('ajax/only_sub_kat', $data);
 	}
 	//cek ketersediaan ads untuk tanggal tertentu
-
+	public function cekKetersediaanAds(){
+		$tipe = $_GET['tipe'];
+		$tgl_awal = $_GET['tanggal'];
+		$durasi = $_GET['durasi'];
+		$tgl_akhir = date('Y-m-d', strtotime('+'.$durasi.' days', strtotime($tgl_awal)));
+		//cek didatabase
+		
+		$sql = "SELECT * FROM ads WHERE ? "
+	}
 }

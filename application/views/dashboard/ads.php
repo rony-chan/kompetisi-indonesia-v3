@@ -24,9 +24,22 @@
 
 	function btnMode(){
 		$('#loader').show();
-		$('#btn_mode').html('<button onclick="cekKetersediaan()" type="button" class="btn btn-default">Cek Ketersediaan</button>');
+		//cek ketersediaan
+		adsTipe = $('#inputTipe').val();
+		tglMulai = $('#inputTanggal').val();
+		durasi = $('#inputDurasi').val();
+		$.ajax({
+			url:'<?php echo site_url("ajax/cekKetersediaanAds")?>',
+			data:{tipe:adsTipe,tanggal:tglMulai,durasi:durasi},
+			success:function(data){
+				alert(data);
+				$('#loader').hide();//hidden loading
+			},
+			error:function(){
+				$('#loader').hide();//hidden loading
+			}
+		});
 		$('#alert').html('');
-		$('#loader').hide();
 	}
 </script>
 <br/>
@@ -78,40 +91,42 @@
 					<label for="inputTanggal" class="col-lg-3 control-label">Tanggal Mulai</label>
 					<div class="col-lg-9">
 						<small>Tanggal Mulai Menampilkan Ads</small>
-						<input type="date" class="form-control" id="inputTanggal" name="inputTanggal" placeholder="Email" required>
+						<input onkeyup="btnMode()" type="date" class="form-control" id="inputTanggal" name="inputTanggal" placeholder="Email" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputDurasi" class="col-lg-3 control-label">Durasi</label>
 					<div class="col-lg-9">
 						<small>Dalam satuan hari, hari pertama dihitung pada tanggal mulai</small>
-						<input type="number" class="form-control" id="inputDurasi" name="inputDurasi" placeholder="masukan angka" required>
+						<input onkeyup="btnMode()" onclick="btnMode()" type="number" class="form-control" id="inputDurasi" name="inputDurasi" placeholder="masukan angka" required>
 					</div>
 				</div>
-				<div class="form-group">
+				<div style="display:none" id="loader" class="alert alert-warning">cek ketersediaan...</div>
+				<div id="nextStep"></div>
+				<!-- <div class="form-group">
 					<label for="inputBanner" class="col-lg-3 control-label">Banner</label>
 					<div class="col-lg-9">
 						<small>Jika banner yang dikirim tidak sesuai dengan ketentuan tipe yang dipilih, maka permintaan ads akan di banned<br/>
 							Support : jpg, jpeg, png</small>
 							<input type="file" class="form-control" id="inputBanner" name="inputBanner" placeholder="masukan angka" required>
 						</div>
-					</div>
+					</div> 
 					<div class="form-group">
-					<label for="inputBank" class="col-lg-3 control-label">Pilihan Bank</label>
-					<div class="col-lg-9">
-						<select name="inputBank" id="inputBipe" class="form-control" required>
-							<?php foreach($bank as $b):?>
-								<option value="<?php echo $b['id_rek_bank']?>"><?php echo $b['rek_bank'];?></option>
-							<?php endforeach;?>
-						</select>
-					</div>
-				</div>
-					<div class="form-group">
-						<div class="col-lg-offset-3 col-lg-9">
-						<span id="alert"></span>
-						<div id="btn_mode"><button onclick="cekKetersediaan()" type="button" class="btn btn-default">Cek Ketersediaan</button> <span id="loader" style="display:none"> <img alt="loader" src="<?php echo base_url('dist/ajax-loader.gif')?>"/></span></div>
+						<label for="inputBank" class="col-lg-3 control-label">Pilihan Bank</label>
+						<div class="col-lg-9">
+							<select name="inputBank" id="inputBipe" class="form-control" required>
+								<?php foreach($bank as $b):?>
+									<option value="<?php echo $b['id_rek_bank']?>"><?php echo $b['rek_bank'];?></option>
+								<?php endforeach;?>
+							</select>
 						</div>
 					</div>
+					<div class="form-group">
+						<div class="col-lg-offset-3 col-lg-9">
+							<span id="alert"></span>
+							<div id="btn_mode"><button onclick="cekKetersediaan()" type="button" class="btn btn-default">Cek Ketersediaan</button> <span id="loader" style="display:none"> <img alt="loader" src="<?php echo base_url('dist/ajax-loader.gif')?>"/></span></div>
+						</div>
+					</div> -->
 				</form>
 			</div>
 		</div>
