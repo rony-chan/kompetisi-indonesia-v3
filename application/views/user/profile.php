@@ -30,7 +30,7 @@ class="profile">
 	</div>
 	<div class="col-md-2">
 		<center>
-			<h3>Rp<?php echo number_format($hadiah['hadiah'])?>,-</h3>	
+			<h3><?php echo number_format($hadiah['hadiah'])?></h3>	
 			<p>Rp</p>
 		</center>
 	</div>
