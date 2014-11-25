@@ -66,7 +66,9 @@ class kompetisi extends base {
 	//berisi detal kompetisi
 	public function detail($id=''){ //if id not set
 		//decrypt
-		$id_kompetisi = $this->ki_id_dec($id);
+		$id_kompetisi = $this->ki_id_dec($id);		
+		//menampilkan para pemenang
+		$data['pemenang'] = $this->m_kompetisi->winner_participans($id_kompetisi);
 		//tambah views
 		if ($this->agent->is_referral())
 		{ 

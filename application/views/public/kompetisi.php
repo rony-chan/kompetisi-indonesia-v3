@@ -166,6 +166,14 @@ function giveRate(x){
 		<br/>
 		<div class="row content-content">
 			<div class="col-md-9">
+				<?php 
+				if(!empty($pemenang)){
+					echo '<h3 class="kompetisi-detail">Pemenang</h3>';
+					foreach($pemenang as $p):
+					echo '<p><a href="">'.$p['username'].'</a> | '.$p['detail'].' | Hadiah Senilai Rp'.number_format($p['hadiah']).',-</p>';
+					endforeach;
+				}
+				?>
 				<h3 class="kompetisi-detail">Syarat dan Ketentuan</h3>
 				<br/>
 				<?php echo $view['konten']?>
