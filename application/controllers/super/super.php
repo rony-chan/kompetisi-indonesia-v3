@@ -24,9 +24,9 @@ class super extends base {
 		
 		//ADMIN OR MODERATOR
 		if($this->session->userdata('level')=='moderator'){
-			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kompetisi').className = 'list-group-item active';document.getElementById('request').className = 'list-group-item';document.getElementById('request').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item';document.getElementById('post').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#kompetisi').addClass('active');});</script>";
 		} else if($this->session->userdata('level') == 'admin'){
-			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kategorix').className = 'list-group-item';document.getElementById('adsx').className = 'list-group-item';document.getElementById('kompetisi').className = 'list-group-item active';document.getElementById('request').className = 'list-group-item';document.getElementById('request').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item';document.getElementById('user').className = 'list-group-item';document.getElementById('post').className = 'list-group-item';document.getElementById('error').className = 'list-group-item';document.getElementById('komentar').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#kompetisi').addClass('active'); });</script>";
 		}		
 		$data['main_kat'] = $this->m_kompetisi->show_main_kat_by_id();
 		//pagination setup
@@ -113,9 +113,9 @@ class super extends base {
 		$data['title'] = 'Main Kategori';
 		//ADMIN OR MODERATOR
 		if($this->session->userdata('level')=='moderator'){
-			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kompetisi').className = 'list-group-item active';document.getElementById('request').className = 'list-group-item';document.getElementById('request').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item';document.getElementById('post').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#kategorix').addClass('active'); });</script>";
 		} else if($this->session->userdata('level') == 'admin'){
-			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kategorix').className = 'list-group-item active';document.getElementById('adsx').className = 'list-group-item';document.getElementById('kompetisi').className = 'list-group-item';document.getElementById('request').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item';document.getElementById('moderator').className = 'list-group-item';document.getElementById('user').className = 'list-group-item';document.getElementById('post').className = 'list-group-item';document.getElementById('komentar').className = 'list-group-item';document.getElementById('error').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#kategorix').addClass('active'); });</script>";
 		}	
 		$querykategori = $this->db->get('main_kat');
 		$data['kategori'] = $querykategori->result_array();//
@@ -126,9 +126,9 @@ class super extends base {
 	public function request(){
 		//ADMIN OR MODERATOR
 		if($this->session->userdata('level')=='moderator'){
-			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kompetisi').className = 'list-group-item';document.getElementById('request').className = 'list-group-item active';document.getElementById('request2').className = 'list-group-item';document.getElementById('post').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#request').addClass('active'); });</script>";
 		} else if($this->session->userdata('level') == 'admin'){
-			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kategorix').className = 'list-group-item';document.getElementById('adsx').className = 'list-group-item';document.getElementById('moderator').className = 'list-group-item';document.getElementById('kompetisi').className = 'list-group-item';document.getElementById('request').className = 'list-group-item active';document.getElementById('request2').className = 'list-group-item';document.getElementById('user').className = 'list-group-item';document.getElementById('post').className = 'list-group-item';document.getElementById('error').className = 'list-group-item';document.getElementById('komentar').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#request').addClass('active'); });</script>";
 		}		
 		//pagination set up
 		$this->load->library('pagination');
@@ -238,9 +238,9 @@ class super extends base {
 	public function request2(){
 		//ADMIN OR MODERATOR
 		if($this->session->userdata('level')=='moderator'){
-			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kompetisi').className = 'list-group-item';document.getElementById('request').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item active';document.getElementById('post').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#request2').addClass('active'); });</script>";
 		} else if($this->session->userdata('level') == 'admin'){
-			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kategorix').className = 'list-group-item';document.getElementById('adsx').className = 'list-group-item';document.getElementById('moderator').className = 'list-group-item';document.getElementById('kompetisi').className = 'list-group-item';document.getElementById('request').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item active';document.getElementById('user').className = 'list-group-item';document.getElementById('post').className = 'list-group-item';document.getElementById('error').className = 'list-group-item';document.getElementById('komentar').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#request2').addClass('active'); });</script>";
 		}
 		//pagination
 		$this->load->library('pagination');
@@ -342,7 +342,7 @@ class super extends base {
 
 	//tampilan halaman user
 	public function moderator(){
-		$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kategorix').className = 'list-group-item';document.getElementById('adsx').className = 'list-group-item';document.getElementById('moderator').className = 'list-group-item active';document.getElementById('kompetisi').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item';document.getElementById('request').className = 'list-group-item ';document.getElementById('user').className = 'list-group-item';document.getElementById('post').className = 'list-group-item';document.getElementById('error').className = 'list-group-item';document.getElementById('komentar').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+		$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#moderator').addClass('active'); });</script>";
 		//pagination set up
 		$this->load->library('pagination');
 		$config['per_page'] = 20;
@@ -458,7 +458,7 @@ class super extends base {
 
 	//tampilan halaman user
 	public function user(){
-		$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kategorix').className = 'list-group-item';document.getElementById('adsx').className = 'list-group-item';document.getElementById('moderator').className = 'list-group-item';document.getElementById('kompetisi').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item';document.getElementById('request').className = 'list-group-item ';document.getElementById('user').className = 'list-group-item active';document.getElementById('post').className = 'list-group-item';document.getElementById('error').className = 'list-group-item';document.getElementById('komentar').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+		$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#user').addClass('active'); });</script>";
 		//pagination set up
 		$this->load->library('pagination');
 		$config['per_page'] = 20;
@@ -536,9 +536,9 @@ class super extends base {
 	public function post(){
 		//ADMIN OR MODERATOR
 		if($this->session->userdata('level')=='moderator'){
-			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kompetisi').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item';document.getElementById('request').className = 'list-group-item ';document.getElementById('post').className = 'list-group-item active';document.getElementById('logout').className = 'list-group-item';})</script>";
+			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#post').addClass('active'); });</script>";
 		} else if($this->session->userdata('level') == 'admin'){
-			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kategorix').className = 'list-group-item';document.getElementById('adsx').className = 'list-group-item';document.getElementById('moderator').className = 'list-group-item';document.getElementById('kompetisi').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item';document.getElementById('request').className = 'list-group-item ';document.getElementById('user').className = 'list-group-item';document.getElementById('post').className = 'list-group-item active';document.getElementById('error').className = 'list-group-item';document.getElementById('komentar').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#post').addClass('active'); });</script>";
 		}		
 		//pagination set up
 		$this->load->library('pagination');
@@ -619,8 +619,15 @@ class super extends base {
 	public function ads(){
 		$this->load->library('pagination');
 		$data['title'] = 'ads | ';
-		$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('kategorix').className = 'list-group-item';document.getElementById('adsx').className = 'list-group-item active';document.getElementById('moderator').className = 'list-group-item';document.getElementById('kompetisi').className = 'list-group-item';document.getElementById('request2').className = 'list-group-item';document.getElementById('request').className = 'list-group-item ';document.getElementById('user').className = 'list-group-item';document.getElementById('post').className = 'list-group-item';document.getElementById('error').className = 'list-group-item';document.getElementById('komentar').className = 'list-group-item';document.getElementById('logout').className = 'list-group-item';})</script>";
+		$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#adsx').addClass('active'); });</script>";
 		//start pagination 
+		//pagination set up
+		$this->load->library('pagination');
+		$config['per_page'] = 20;
+		$config['uri_segment'] = 4;
+		$config['num_link'] = 4;		
+		$config['page_query_string'] = TRUE;
+		$config['base_url'] = site_url().'/super/super/ads?act='.$this->input->get('act', TRUE);
 		$config['total_rows'] = $this->db->count_all('ads');//count all ads row
 		$uri = $this->uri->segment(4);
 		$this->pagination->initialize($config);
