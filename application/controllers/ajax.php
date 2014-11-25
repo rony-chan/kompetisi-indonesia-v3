@@ -32,4 +32,15 @@ class ajax extends base {
 		$tgl_akhir = date('Y-m-d', strtotime('+'.$durasi.' days', strtotime($tgl_awal)));
 		//cek didatabase
 	}
+	//cek username
+	public function cekUsername(){
+		$username = $_GET['username'];
+		$this->db->where('username',$username);
+		$query = $this->db->get('user');
+		if($query->num_rows()>0){
+			return true;
+		}else{
+			$this->db->get('meme');
+		}
+	}
 }

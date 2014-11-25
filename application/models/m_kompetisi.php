@@ -8,7 +8,7 @@ class m_kompetisi extends CI_Model{
 
 	//hitung total kompetisi yang diikuti oleh user
 	function count_diikuti_kompetisi($id){
-		$sql = "SELECT * FROM kompetisi_btn WHERE id_user = ? AND gabung = 1 ";
+		$sql = "SELECT * FROM kompetisi_btn WHERE id_user = ? AND gabung = 1 AND verified = 1 ";
 		$query = $this->db->query($sql, $id);
 		//cek data apakah tersedia
 		$result = $query->num_rows();
@@ -403,7 +403,26 @@ class m_kompetisi extends CI_Model{
 		FROM kompetisi LEFT JOIN kompetisi_btn ON kompetisi.id_kompetisi = kompetisi_btn.id_kompetisi 
 		LEFT JOIN user ON user.id_user = kompetisi.author
 		LEFT JOIN main_kat ON main_kat.id_main_kat= kompetisi.id_main_kat 
-		WHERE kompetisi_btn.id_user = ".$id." AND kompetisi_btn.gabung = 1  
+		WHERE kompetisi_btn.id_user = ".$id." AND kompetisi_btn.gabung = 1 AND verified = 1  
+		ORDER BY kompetisi.pengumuman DESC LIMIT ".$limit." OFFSET ".$offset."";
+		$query = $this->db->query($sql);
+		//show array
+		if($query->num_rows() > 0) {
+			$g_result = $query->result_array();
+			$query->free_result();
+			return $g_result;
+		} else {
+			return array();
+		}
+	}
+	//lihat kompetisi yang dimenangkan oleh user
+	function show_kompetisi_menang($id, $limit, $offset) {
+		$sql = "SELECT views,user.username AS 'authusername',kompetisi.id_kompetisi AS 'id', main_kat.main_kat AS 'main_kat',  kompetisi.judul_kompetisi AS 'judul', kompetisi.penyelenggara AS 'penyelenggara',kompetisi.sort AS 'sort', kompetisi.deadline - CURDATE() AS 'deadline', kompetisi.pengumuman - CURDATE()  AS ' pengumuman', kompetisi.total_hadiah AS 'total' 
+		FROM kompetisi LEFT JOIN kompetisi_btn ON kompetisi.id_kompetisi = kompetisi_btn.id_kompetisi 
+		LEFT JOIN user ON user.id_user = kompetisi.author
+		LEFT JOIN main_kat ON main_kat.id_main_kat= kompetisi.id_main_kat 
+		LEFT JOIN win ON win.id_kompetisi = kompetisi.id_kompetisi
+		WHERE kompetisi_btn.id_user = ".$id." AND kompetisi_btn.gabung = 1 AND verified = 1 AND win.id_user = ".$id." 
 		ORDER BY kompetisi.pengumuman DESC LIMIT ".$limit." OFFSET ".$offset."";
 		$query = $this->db->query($sql);
 		//show array
@@ -728,7 +747,7 @@ class m_kompetisi extends CI_Model{
 		$sql = "SELECT user.username AS 'username',user.fullname AS 'name',user.email AS 'email',user.gender AS 'gender'
 		FROM user INNER JOIN kompetisi_btn ON kompetisi_btn.id_user = user.id_user
 		INNER JOIN kompetisi ON kompetisi_btn.id_kompetisi = kompetisi.id_kompetisi
-		WHERE kompetisi_btn.tandai = 1 AND kompetisi_btn.verified = 0 AND kompetisi_btn.id_kompetisi = ?";
+		WHERE kompetisi_btn.gabung = 1 AND kompetisi_btn.verified = 0 AND kompetisi_btn.id_kompetisi = ?";
 		$query = $this->db->query($sql,$id);
 		if($query->num_rows()>0){
 			return $query->result_array();
@@ -736,13 +755,21 @@ class m_kompetisi extends CI_Model{
 			return array();
 		}
 	}
-
+	//total peserta belum terverifikasi
+	public function count_unverified_participans($id){//id kompetisi
+		$sql = "SELECT user.username AS 'username',user.fullname AS 'name',user.email AS 'email',user.gender AS 'gender'
+		FROM user INNER JOIN kompetisi_btn ON kompetisi_btn.id_user = user.id_user
+		INNER JOIN kompetisi ON kompetisi_btn.id_kompetisi = kompetisi.id_kompetisi
+		WHERE kompetisi_btn.gabung = 1 AND kompetisi_btn.verified = 0 AND kompetisi_btn.id_kompetisi = ?";
+		$query = $this->db->query($sql,$id);
+		return $query->num_rows();
+	}
 	//menampilkan peserta yang terverifikasi
 	public function verified_participans($id){//id kompetisi
 		$sql = "SELECT user.username AS 'username',user.fullname AS 'name',user.email AS 'email',user.gender AS 'gender'
 		FROM user INNER JOIN kompetisi_btn ON kompetisi_btn.id_user = user.id_user
 		INNER JOIN kompetisi ON kompetisi_btn.id_kompetisi = kompetisi.id_kompetisi
-		WHERE kompetisi_btn.tandai = 1 AND kompetisi_btn.verified = 1 AND kompetisi_btn.id_kompetisi = ?";
+		WHERE kompetisi_btn.gabung = 1 AND kompetisi_btn.verified = 1 AND kompetisi_btn.id_kompetisi = ?";
 		$query = $this->db->query($sql,$id);
 		if($query->num_rows()>0){
 			return $query->result_array();
@@ -750,8 +777,70 @@ class m_kompetisi extends CI_Model{
 			return array();
 		}
 	}
+	//total peserta yang terverifikasi
+	public function count_verified_participans($id){//id kompetisi
+		$sql = "SELECT user.username AS 'username',user.fullname AS 'name',user.email AS 'email',user.gender AS 'gender'
+		FROM user INNER JOIN kompetisi_btn ON kompetisi_btn.id_user = user.id_user
+		INNER JOIN kompetisi ON kompetisi_btn.id_kompetisi = kompetisi.id_kompetisi
+		WHERE kompetisi_btn.gabung = 1 AND kompetisi_btn.verified = 1 AND kompetisi_btn.id_kompetisi = ?";
+		$query = $this->db->query($sql,$id);
+		return $query->num_rows();
+	}
+	//menambahkan pemenang
+	public function add_winner($params){//idkompetisi | iduser | detail | hadiah
+		$sql = "INSERT INTO win(id_kompetisi,id_user,detail,hadiah) VALUES(?,?,?,?)";
+		$this->db->query($sql,$params);
+	}
+	//menampilkan pemenang
+	public function winner_participans($id){//id_kompetisi
+		$sql = "SELECT user.username AS 'username',user.fullname AS 'name',user.email AS 'email',
+		win.detail AS 'detail',win.hadiah AS 'hadiah'
+		FROM user INNER JOIN win ON user.id_user = win.id_user
+		WHERE win.id_kompetisi = ?";
+		$query = $this->db->query($sql,$id);
+		if($query->num_rows()>0){
+			return $query->result_array();
+		}else{
+			return array();
+		}
+	}
+	//jumlah pemenang
+	public function count_winner_participans($id){//id_kompetisi
+		$sql = "SELECT user.username AS 'username',user.fullname AS 'name',user.email AS 'email',
+		win.detail AS 'detail',win.hadiah AS 'hadiah'
+		FROM user INNER JOIN win ON user.id_user = win.id_user
+		WHERE win.id_kompetisi = ?";
+		$query = $this->db->query($sql,$id);
+		return $query->num_rows();
+	}
+	//data pemenang
+	public function data_winner($params){//iduser | idkompetisi
+		$sql = "SELECT user.username AS 'username',user.fullname AS 'name',user.email AS 'email',
+		win.detail AS 'detail',win.hadiah AS 'hadiah'
+		FROM user INNER JOIN win ON user.id_user = win.id_user
+		WHERE win.id_user = ? AND win.id_kompetisi = ?";
+		$query = $this->db->query($sql,$params);
+		if($query->num_rows()>0){
+			return $query->result_array();
+		}else{
+			return array();
+		}
+	}
+	//lihat kompetisi yang dimenangkan user
 
-
+	//total kompetisi yang dimenangkan user
+	public function total_dimenangkan($iduser){
+		$this->db->where('id_user',$iduser);
+		$query = $this->db->get('win');
+		return $query->num_rows();
+	}
+	//total hadiah yang didapat user
+	public function total_hadiah($iduser){
+		$this->db->where('id_user',$iduser);
+		$this->db->select_sum('hadiah');
+		$query = $this->db->get('win');
+		return $query->row_array();
+	}
 	////////////////////////////////////////////////////////////
 	///////////////////////TENTANG KABAR///////////////////////
 	////////////////////////////////////////////////////////////

@@ -125,14 +125,19 @@ function giveRate(x){
 					<?php if($btn['tandai'] == 0 ) { //jika sudah tekan tombol diikuti?>
 					<a title="Tandai Kompetisi" href="<?php echo site_url('process/proc_public/kompetisi_btn?act=tandai&kom=').$id?>" type="button" class="btn btn-default btn-xs">tandai</a><span class="label label-default"><?php echo $ditandai['total']?></span>
 					<?php } else { ?>
-					<a title="Tandai Kompetisi" style="background-color:#cccccc" href="<?php echo site_url('process/proc_public/kompetisi_btn?act=untandai&kom=').$id?>" type="button" class="btn btn-default btn-xs">tandai </a><span class="label label-default"><?php echo $ditandai['total']?></span>
+					<a title="Batal Tandai Kompetisi" style="background-color:#cccccc" href="<?php echo site_url('process/proc_public/kompetisi_btn?act=untandai&kom=').$id?>" type="button" class="btn btn-default btn-xs">batal tandai </a><span class="label label-default"><?php echo $ditandai['total']?></span>
 					<?php } ?>
-					<!-- <a href="#pdf" target="_blank" type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span></a> -->
+					<?php if($btn['gabung'] == 0 ) { //jika sudah tekan tombol gabung?>
+					<a title="Ikuti Kompetisi" href="<?php echo site_url('process/proc_public/kompetisi_btn?act=gabung&kom=').$id?>" type="button" class="btn btn-default btn-xs">ikuti</a><span class="label label-default"><?php echo $gabung['total']?></span>
+					<?php } else { ?>
+					<a title="Batal Ikuti Kompetisi" style="background-color:#cccccc" href="<?php echo site_url('process/proc_public/kompetisi_btn?act=ungabung&kom=').$id?>" type="button" class="btn btn-default btn-xs">batal ikuti </a><span class="label label-default"><?php echo $gabung['total']?></span>
+					<?php } ?>
 					<a href="<?php echo site_url('save?id='.$id)?>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-floppy-disk"></span>save PDF</a>
 				</div>
 				<?php } else { //jika belum login?> 				
 				<div class="col-md-6">
-					<a title="Tandai Kompetisi" href="#login" data-toggle="modal" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-ok-sign"></span> tandai </a><span class="label label-default"><?php echo $ditandai['total']?></span>						
+					<a title="Tandai Kompetisi" href="#login" data-toggle="modal" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-ok-sign"></span> tandai </a><span class="label label-default"><?php echo $ditandai['total']?></span>
+					<a title="Ikuti Kompetisi" href="#login" data-toggle="modal" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-ok-sign"></span> gabung </a><span class="label label-default"><?php echo $gabung['total']?>?></span>						
 					<a href="<?php echo site_url('save?id='.$id)?>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-floppy-disk"></span>save PDF</a>
 				</div>
 				<?php } ?>

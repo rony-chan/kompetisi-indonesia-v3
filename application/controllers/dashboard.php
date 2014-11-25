@@ -190,6 +190,9 @@ class dashboard extends base {
 	//manage competition
 	//user - winners
 	public function manage(){
+		$idkompetisi = $_GET['id'];
+		$idkompetisi = $this->ki_id_dec($idkompetisi); //id kompetisi
+		$id = $this->session->userdata('id_user'); //id user
 		if(empty($_GET['id'])){redirect(site_url('dashboard/saya'));}
 		if(!empty($_GET['act'])){
 			switch ($_GET['act']) {
@@ -198,11 +201,16 @@ class dashboard extends base {
 					break;
 				case 'unverify':
 					$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#unverify\').addClass(\'active \');});</script>';
+					//unverified participans
+					$data['unverified'] = $this->m_kompetisi->unverified_participans($idkompetisi);
 					break;
 				case 'verified':
 					$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#verified\').addClass(\'active \');});</script>';
+					//verified participans
+					$data['verified'] = $this->m_kompetisi->verified_participans($idkompetisi);
 					break;
 				case 'winner':
+					$data['winner'] = $this->m_kompetisi->winner_participans($idkompetisi);
 					$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#pemenang\').addClass(\'active \');});</script>';
 					break;				
 				default:
@@ -212,12 +220,10 @@ class dashboard extends base {
 		} else {
 			$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#detail\').addClass(\'active \');});</script>';
 		}
-		$idkompetisi = $_GET['id'];
-		$id = $this->session->userdata('id_user');
+		
 		$data['ikut'] = $this->m_kompetisi->count_diikuti_kompetisi($id);
 		$data['tandai'] = $this->m_kompetisi->count_tandai_kompetisi($id);
 		$data['kompetisiku'] = $this->m_kompetisi->count_kompetisiku($id);
-		$idkompetisi = $this->ki_id_dec($idkompetisi);
 		$sqlkompetisi = $this->db->get_where('kompetisi',array('id_kompetisi'=>$idkompetisi));
 		//cek apakah kompetisi tersedia
 		if($sqlkompetisi->num_rows()<0){
@@ -230,15 +236,97 @@ class dashboard extends base {
 		}
 		$data['kompetisi'] = $this->m_kompetisi->get_competition_by_id_kompetisi($idkompetisi);
 		$data['title'] = 'Manajemen : '.$data['kompetisi']['judul_kompetisi'];
-		//unverified participans
-		$data['unverified'] = $this->m_kompetisi->unverified_participans($idkompetisi);
-		//verified participans
-		$data['verified'] = $this->m_kompetisi->verified_participans($idkompetisi);
 		$this->defaultdisplay('dashboard/manage',$data);
 		$this->footerdisplay();
+	}
+	//btn verifikasi
+	public function do_verifikasi(){//id kompetisi
+		if(!empty($_GET['username'])){
+			$username = $_GET['username'];
+			$this->db->where('username',$username);
+			$getuser = $this->db->get('user');
+			$getuser = $getuser->row_array();
+			$iduser = $getuser['id_user'];	
+		}
+		$id = $_GET['id'];
+		$idkompetisi = $this->ki_id_dec($id); //id kompetisi
+		$params = array($idkompetisi,$iduser);
+		//print_r($params);
+		$sql = "UPDATE kompetisi_btn SET verified = 1 WHERE id_kompetisi = ? AND id_user = ?";
+		if($this->db->query($sql,$params)){
+			redirect(site_url('dashboard/manage?id='.$id.'&act=unverify'));
+		} else {
+			echo 'Gagal verifikasi :: user bukan peserta / kompetisi tidak tersedia';
+		}
+	}
+	//btn batal verifikasi
+	public function undo_verifikasi(){//id kompetisi
+		if(!empty($_GET['username'])){
+			$username = $_GET['username'];
+			$this->db->where('username',$username);
+			$getuser = $this->db->get('user');
+			$getuser = $getuser->row_array();
+			$iduser = $getuser['id_user'];	
+		}
+		$id = $_GET['id'];
+		$idkompetisi = $this->ki_id_dec($id); //id kompetisi
+		$params = array($idkompetisi,$iduser);
+		$sql = "UPDATE kompetisi_btn SET verified = 0 WHERE id_kompetisi = ? AND id_user = ?";
+		if($this->db->query($sql,$params)){
+			redirect(site_url('dashboard/manage?id='.$id.'&act=verified'));
+		} else {
+			echo 'Gagal verifikasi :: user bukan peserta / kompetisi tidak tersedia';
+		}
 
 	}
+	//memproses pemenang
+	public function proc_winner(){
+		if(!empty($_GET['act'])){
+			switch ($_GET['act']) {
+				case 'add':
+					//data
+					$username = $_POST['username'];
+					$this->db->where('username',$username);
+					$getuser = $this->db->get('user');
+					$getuser = $getuser->row_array();
+					$iduser = $getuser['id_user'];//iduser
+					$detail = $_POST['detail'];//detail pemenang
+					$hadiah = $_POST['hadiah'];//hadiah pemenang
+					$idkompetisi = $this->ki_id_dec($_POST['id']);//id kompetisi
+					//cek apakah sudah ada datanya
+					$sqlcekpemenang = "SELECT * FROM win WHERE id_kompetisi = ".$idkompetisi." AND id_user = ".$iduser;
+					$querycekpemenang = $this->db->query($sqlcekpemenang);
+					if($querycekpemenang->num_rows()>0){//data pemenang sudah ada
+						redirect(site_url('dashboard/manage?id='.$_POST['id'].'&act=winner&note=data user sudah ada, silahkan edit'));
+					}else{//belum ada data pemenang
+						//memasukan data pemenang
+						$params = array($idkompetisi,$iduser,$detail,$hadiah);
+						$this->m_kompetisi->add_winner($params);
+						redirect(site_url('dashboard/manage?id='.$_POST['id'].'&act=winner'));
+					}
+					break;	
 
+				case 'delete':
+					//data
+					$username = $_GET['username'];
+					$this->db->where('username',$username);
+					$getuser = $this->db->get('user');
+					$getuser = $getuser->row_array();
+					$iduser = $getuser['id_user'];//iduser
+					$idkompetisi = $this->ki_id_dec($_GET['id']);//id kompetisi
+					$this->db->where('id_user',$iduser);
+					$this->db->where('id_kompetisi',$idkompetisi);
+					$this->db->delete('win');
+					redirect(site_url('dashboard/manage?id='.$_GET['id'].'&act=winner'));
+					break;
+				default:
+					echo 'menu salah';
+					break;
+			}
+		}else{
+			redirect('dashboard/saya');//kembali ke kompetisi saya
+		}
+	}
 	//ads management for member //static pages
 	public function ads(){
 		$data['title'] = "Ads | ";
