@@ -31,7 +31,5 @@ class ajax extends base {
 		$durasi = $_GET['durasi'];
 		$tgl_akhir = date('Y-m-d', strtotime('+'.$durasi.' days', strtotime($tgl_awal)));
 		//cek didatabase
-		
-		$sql = "SELECT * FROM ads WHERE ? "
 	}
 }

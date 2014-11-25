@@ -51,7 +51,7 @@ class m_kompetisi extends CI_Model{
 	//show competition by id_kompetisi
 	function get_competition_by_id_kompetisi($id){
 		if(!is_numeric($id)){$id=0;} //jika id bukan nomor
-		$sql = "SELECT id_kompetisi, kompetisi.id_main_kat AS 'id_main_kat', kompetisi.id_sub_kat AS 'id_sub_kat', judul_kompetisi, poster,penyelenggara, konten, tgl_buat, tgl_edit, user.username AS 'author', main_kat.main_kat AS 'kategori', sort, hadiah, pengumuman, deadline, total_hadiah, sumber, rating,views
+		$sql = "SELECT id_kompetisi, kompetisi.id_main_kat AS 'id_main_kat', kompetisi.id_sub_kat AS 'id_sub_kat', judul_kompetisi,poster,penyelenggara, konten, tgl_buat, tgl_edit, user.username AS 'author', main_kat.main_kat AS 'kategori', sort, hadiah, pengumuman, deadline, total_hadiah, sumber, rating,views
 		FROM kompetisi LEFT JOIN user ON kompetisi.author = user.id_user 
 		LEFT JOIN main_kat ON kompetisi.id_main_kat = main_kat.id_main_kat
 		WHERE id_kompetisi = ".$id." ";
@@ -67,7 +67,7 @@ class m_kompetisi extends CI_Model{
 
 	//show competition by id_user
 	function get_competition_by_id_user($id, $limit, $offset){
-		$sql = "SELECT * FROM kompetisi WHERE author = ".$id." LIMIT ".$limit." OFFSET ".$offset." ";
+		$sql = "SELECT * FROM kompetisi WHERE author = ".$id." ORDER BY id_kompetisi DESC LIMIT ".$limit." OFFSET ".$offset." ";
 		//exec
 		$query = $this->db->query($sql);
 	    //show result
@@ -385,7 +385,8 @@ class m_kompetisi extends CI_Model{
 		LEFT JOIN kompetisi_btn ON kompetisi.id_kompetisi = kompetisi_btn.id_kompetisi 
 		LEFT JOIN user ON user.id_user = kompetisi.author 
 		LEFT JOIN main_kat ON main_kat.id_main_kat=kompetisi.id_main_kat 
-		WHERE kompetisi_btn.id_user = ".$id." AND kompetisi_btn.tandai = 1 ORDER BY kompetisi.pengumuman DESC LIMIT ".$limit." OFFSET ".$offset." ";
+		WHERE kompetisi_btn.id_user = ".$id." AND kompetisi_btn.tandai = 1 ORDER BY kompetisi.pengumuman DESC 
+		LIMIT ".$limit." OFFSET ".$offset." ";
 		$query = $this->db->query($sql);
 		//show array
 		if($query->num_rows() > 0) {
@@ -402,7 +403,8 @@ class m_kompetisi extends CI_Model{
 		FROM kompetisi LEFT JOIN kompetisi_btn ON kompetisi.id_kompetisi = kompetisi_btn.id_kompetisi 
 		LEFT JOIN user ON user.id_user = kompetisi.author
 		LEFT JOIN main_kat ON main_kat.id_main_kat= kompetisi.id_main_kat 
-		WHERE kompetisi_btn.id_user = ".$id." AND kompetisi_btn.gabung = 1  ORDER BY kompetisi.pengumuman DESC LIMIT ".$limit." OFFSET ".$offset."";
+		WHERE kompetisi_btn.id_user = ".$id." AND kompetisi_btn.gabung = 1  
+		ORDER BY kompetisi.pengumuman DESC LIMIT ".$limit." OFFSET ".$offset."";
 		$query = $this->db->query($sql);
 		//show array
 		if($query->num_rows() > 0) {
@@ -717,6 +719,39 @@ class m_kompetisi extends CI_Model{
 			return array();
 		}
 	}
+
+	////////////////////////////////////////////////////////////
+	///////////////////////TENTANG PESERTA//////////////////////
+	////////////////////////////////////////////////////////////
+	//menampilkan peserta yang belum diverifikasi
+	public function unverified_participans($id){//id kompetisi
+		$sql = "SELECT user.username AS 'username',user.fullname AS 'name',user.email AS 'email',user.gender AS 'gender'
+		FROM user INNER JOIN kompetisi_btn ON kompetisi_btn.id_user = user.id_user
+		INNER JOIN kompetisi ON kompetisi_btn.id_kompetisi = kompetisi.id_kompetisi
+		WHERE kompetisi_btn.tandai = 1 AND kompetisi_btn.verified = 0 AND kompetisi_btn.id_kompetisi = ?";
+		$query = $this->db->query($sql,$id);
+		if($query->num_rows()>0){
+			return $query->result_array();
+		} else {
+			return array();
+		}
+	}
+
+	//menampilkan peserta yang terverifikasi
+	public function verified_participans($id){//id kompetisi
+		$sql = "SELECT user.username AS 'username',user.fullname AS 'name',user.email AS 'email',user.gender AS 'gender'
+		FROM user INNER JOIN kompetisi_btn ON kompetisi_btn.id_user = user.id_user
+		INNER JOIN kompetisi ON kompetisi_btn.id_kompetisi = kompetisi.id_kompetisi
+		WHERE kompetisi_btn.tandai = 1 AND kompetisi_btn.verified = 1 AND kompetisi_btn.id_kompetisi = ?";
+		$query = $this->db->query($sql,$id);
+		if($query->num_rows()>0){
+			return $query->result_array();
+		} else {
+			return array();
+		}
+	}
+
+
 	////////////////////////////////////////////////////////////
 	///////////////////////TENTANG KABAR///////////////////////
 	////////////////////////////////////////////////////////////

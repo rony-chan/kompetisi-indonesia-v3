@@ -15,6 +15,7 @@ class dashboard extends base {
 
 	public function index() {
 		
+		$data['script'] = '<script>$(document).ready(function(){$(\'#ikut\').addClass(\'active white-text\');});</script>';
 		$id = $this->session->userdata('id_user'); //mengambil data id user
 		$data['title'] = 'Kompetisi diikuti | ';
 		//pagination set up
@@ -54,6 +55,7 @@ class dashboard extends base {
 	}
 
 	public function ditandai(){
+		$data['script'] = '<script>$(document).ready(function(){$(\'#tandai\').addClass(\'active white-text\');});</script>';
 		$id = $this->session->userdata('id_user'); //mengambil data id user
 		$data['title'] = 'Kompetisi diikuti | ';	
 		//pagination set up
@@ -94,6 +96,7 @@ class dashboard extends base {
 	}
 
 	public function saya(){
+		$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');});</script>';
 		$id = $this->session->userdata('id_user'); //mengambil data id user
 		$data['title'] = 'Kompetisi Upload Oleh Saya | ';	
 		//pagination set up
@@ -133,7 +136,7 @@ class dashboard extends base {
 	}
 
 	public function pasang(){
-		
+		$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');});</script>';
 		//jika by tidak sama dengan username, maka dicancel
 		if( isset($_GET['by']) && $_GET['by'] == $this->session->userdata('username')) {			
 			$data['kat'] = $this->m_kompetisi->show_kat();
@@ -154,9 +157,13 @@ class dashboard extends base {
 
 	public function edit(){
 		//id kompetisi
+		$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');});</script>';
 		$data['title'] = "Edit Kompetisi | ";
 		$dec = base64_decode(base64_decode($_GET['id']));
 		$id = str_replace('', '=', $dec);
+		$data['ikut'] = $this->m_kompetisi->count_diikuti_kompetisi($id);
+		$data['tandai'] = $this->m_kompetisi->count_tandai_kompetisi($id);
+		$data['kompetisiku'] = $this->m_kompetisi->count_kompetisiku($id);
 		$data['view'] = $this->m_kompetisi->get_competition_by_id_kompetisi($id);
 		$id_main_kat = $data['view']['id_main_kat'];
 		$data['main_kat'] = $this->m_kompetisi->show_main_kat_by_id();
@@ -167,13 +174,67 @@ class dashboard extends base {
 	}
 
 	public function profile(){ //halaman untuk edit data user
+		$data['script'] = '<script>$(document).ready(function(){$(\'#edit\').addClass(\'active white-text\');});</script>';
 		$data['title'] = "Edit Profile | ";
 		$id = $this->session->userdata('id_user');
+		$data['ikut'] = $this->m_kompetisi->count_diikuti_kompetisi($id);
 		$data['tandai'] = $this->m_kompetisi->count_tandai_kompetisi($id);
 		$data['kompetisiku'] = $this->m_kompetisi->count_kompetisiku($id);
 		$id = $this->session->userdata('id_user');
 		$data['view'] = $this->m_user->show_user($id);
 		$this->defaultdisplay('dashboard/profile', $data);
+		$this->footerdisplay();
+
+	}
+
+	//manage competition
+	//user - winners
+	public function manage(){
+		if(empty($_GET['id'])){redirect(site_url('dashboard/saya'));}
+		if(!empty($_GET['act'])){
+			switch ($_GET['act']) {
+				case 'komentar':
+					$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#komentar\').addClass(\'active \');});</script>';
+					break;
+				case 'unverify':
+					$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#unverify\').addClass(\'active \');});</script>';
+					break;
+				case 'verified':
+					$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#verified\').addClass(\'active \');});</script>';
+					break;
+				case 'winner':
+					$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#pemenang\').addClass(\'active \');});</script>';
+					break;				
+				default:
+					$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#detail\').addClass(\'active \');});</script>';
+					break;
+			} 
+		} else {
+			$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#detail\').addClass(\'active \');});</script>';
+		}
+		$idkompetisi = $_GET['id'];
+		$id = $this->session->userdata('id_user');
+		$data['ikut'] = $this->m_kompetisi->count_diikuti_kompetisi($id);
+		$data['tandai'] = $this->m_kompetisi->count_tandai_kompetisi($id);
+		$data['kompetisiku'] = $this->m_kompetisi->count_kompetisiku($id);
+		$idkompetisi = $this->ki_id_dec($idkompetisi);
+		$sqlkompetisi = $this->db->get_where('kompetisi',array('id_kompetisi'=>$idkompetisi));
+		//cek apakah kompetisi tersedia
+		if($sqlkompetisi->num_rows()<0){
+			redirect(site_url('dashboard/saya')); //kompetisi tidak tersedia
+		}
+		//apakah user yang memasang kompetisi
+		$sqlkompetisi = $this->db->get_where('kompetisi',array('author'=>$this->session->userdata('id_user')));
+		if($sqlkompetisi->num_rows()<0){
+			redirect(site_url('dashboard/saya')); //kompetisi tidak tersedia
+		}
+		$data['kompetisi'] = $this->m_kompetisi->get_competition_by_id_kompetisi($idkompetisi);
+		$data['title'] = 'Manajemen : '.$data['kompetisi']['judul_kompetisi'];
+		//unverified participans
+		$data['unverified'] = $this->m_kompetisi->unverified_participans($idkompetisi);
+		//verified participans
+		$data['verified'] = $this->m_kompetisi->verified_participans($idkompetisi);
+		$this->defaultdisplay('dashboard/manage',$data);
 		$this->footerdisplay();
 
 	}
