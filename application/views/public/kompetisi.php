@@ -170,7 +170,7 @@ function giveRate(x){
 				if(!empty($pemenang)){
 					echo '<h3 class="kompetisi-detail">Pemenang</h3>';
 					foreach($pemenang as $p):
-					echo '<p><a href="">'.$p['username'].'</a> | '.$p['detail'].' | Hadiah Senilai Rp'.number_format($p['hadiah']).',-</p>';
+					echo '<p><a href="'.site_url('publik/profile/'.$p['username']).'">'.$p['username'].'</a> | '.$p['detail'].' | Hadiah Senilai Rp'.number_format($p['hadiah']).',-</p>';
 					endforeach;
 				}
 				?>
