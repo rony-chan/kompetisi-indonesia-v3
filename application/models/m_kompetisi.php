@@ -851,4 +851,41 @@ class m_kompetisi extends CI_Model{
 		return $kabar->result_array();
 	}
 
+	////////////////////////////////////////////////////////////
+	///////////////////////TENTANG KOMENTAR/////////////////////
+	////////////////////////////////////////////////////////////
+
+	// lihat komentar berdasarkan kompetisi
+	public function show_komentar_by_kompetisi($id){//id kompetisi
+		$sql = "SELECT komentar, id_komentar, user.username AS 'username', user.oauth_provider AS 'provider'
+		user.oauth_id AS 'oauth_id'
+		FROM komentar INNER JOIN user ON komentar.id_user = user.id_user
+		WHERE komentar.id_kompetisi = ?";
+		//eksekusi
+		$query = $this->db->query($sql,$id);
+		if($query->num_rows()>0) { //jika ada komentar
+			return $query->result_array();
+		} else {//jika kosong
+			return array();
+		}
+	}
+
+	//lihat komentar berdasarkan id_user dan kompetisi
+	public function show_komentar_by_kompetisi_user($params){ //idkompetisi dan iconv(in_charset, out_charset, str)duser
+		$sql = "SELECT komentar, id_komentar, user.username AS 'username', user.oauth_provider AS 'provider'
+		user.oauth_id AS 'oauth_id'
+		FROM komentar 
+		INNER JOIN user ON komentar.id_user = user.id_user
+		INNER JOIN kompetisi ON kompetisi.id_kompetisi = komentar.id_kompetisi
+		WHERE komentar.id_kompetisi = ? 
+		AND kompetisi.author = ?";
+		//eksekusi
+		$query = $this->db->query($sql,$params);
+		if($query->num_rows()>0) { //jika ada komentar
+			return $query->result_array();
+		} else {//jika kosong
+			return array();
+		}
+	}
+
 }

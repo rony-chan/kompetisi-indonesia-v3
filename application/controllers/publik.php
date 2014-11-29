@@ -53,6 +53,7 @@ class publik extends base {
 			//total kategori
 			$data['kat'] = $this->m_kompetisi->count_kategori();
 			//total hadiah bulan ini
+			$data['kabar'] = $this->m_kompetisi->empat_kabar_baru();
 			$data['total'] = $this->m_kompetisi->count_hadiah();
 			$this->defaultdisplay('public/home', $data);
 			$this->footerdisplay();

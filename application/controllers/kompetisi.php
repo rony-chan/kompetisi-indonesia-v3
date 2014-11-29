@@ -126,4 +126,25 @@ class kompetisi extends base {
 		}
 		
 	}
+
+	//////////////////////////////////////
+	/////// SEMUA TENTANG KOMENTAR ///////
+	//////////////////////////////////////
+
+	public function add_komentar(){ //parameter adalah id kompetisi dan id user
+		$iduser  = $this->session->userdata('id_user'); //get id user
+		$idkompetisi = $this->ki_id_dec($_POST['id_kompetisi']);//get id kompetisi
+		$komentar = $_POST['input_komentar'];
+		$params = 
+		array(
+			'komentar'=>$komentar,
+			'id_kompetisi'=>$idkompetisi,
+			'id_user'=>$iduser,
+			'status'=>'active');
+		if($this->db->insert('komentar',$params)){
+			redirect(site_url(''));
+		} else {
+			echo 'gagal memasukan komentar';
+		}
+	}
 }

@@ -137,7 +137,7 @@ function giveRate(x){
 				<?php } else { //jika belum login?> 				
 				<div class="col-md-6">
 					<a title="Tandai Kompetisi" href="#login" data-toggle="modal" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-ok-sign"></span> tandai </a><span class="label label-default"><?php echo $ditandai['total']?></span>
-					<a title="Ikuti Kompetisi" href="#login" data-toggle="modal" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-ok-sign"></span> gabung </a><span class="label label-default"><?php echo $gabung['total']?>?></span>						
+					<a title="Ikuti Kompetisi" href="#login" data-toggle="modal" type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-ok-sign"></span> gabung </a><span class="label label-default"><?php echo $gabung['total']?></span>						
 					<a href="<?php echo site_url('save?id='.$id)?>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-floppy-disk"></span>save PDF</a>
 				</div>
 				<?php } ?>
@@ -227,7 +227,7 @@ function giveRate(x){
 								<div class="col-md-10">
 									<!-- form balas komentar -->
 									<form action="#" method="POST" class="form">
-										<textarea class="form-control" placeholder="ada pertanyaan masukan disini"></textarea>
+										<textarea style="width:100%" class="form-control" placeholder="ada pertanyaan masukan disini"></textarea>
 										<button style="margin-top:5px;float-right"  class="btn btn-default" type="submit" >Komentar</button>
 									</form>
 								</div>
