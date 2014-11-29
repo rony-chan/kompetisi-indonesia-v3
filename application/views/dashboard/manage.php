@@ -4,7 +4,6 @@
 		$('#successnote').hide();
 		username = $('#inputUsername').val();
 		if(username == ''){ //jika username kosong
-			
 		} else {
 			//cek di database
 			$.ajax({
@@ -32,14 +31,12 @@
 		<div class="col-md-2">
 			<?php $this->load->view('dashboard/menu');?>
 		</div>
-
 		<div style="background-color:#fff" class="col-md-10">
 			<h3>Manage : <?php echo $kompetisi['judul_kompetisi'];?> <a class="btn btn-default btn-xs" title="edit kompetisi" href="<?php echo site_url('dashboard/edit?id='.$_GET['id'])?>"><span class="glyphicon glyphicon-pencil"></span></a></h3>
 			<p><strong>Deadline : </strong> 230 hari lagi</p>
 			<p><strong>Pengumuman : </strong> 237 hari lagi</p>
 			<hr/>
 			<?php $this->load->view('dashboard/topmenu_manage')?>
-
 			<div style="padding:10px" class="tab-content">
 				<div class="tab-pane active" id="home">
 					<?php if(isset($_GET['act'])){
@@ -64,7 +61,6 @@
 							endforeach;
 							echo '</table></div>';
 							break;
-
 							case 'unverify':
 							echo ' <div class="col-md-5">
 							<form class="form" method="GET" action="'.site_url('dashboard/do_verifikasi').'">
@@ -86,7 +82,6 @@
 						endforeach;
 						echo '</table>';
 						break;
-
 						case 'verified':
 						echo ' <div class="col-md-5">
 						<form class="form" method="GET" action="'.site_url('dashboard/undo_verifikasi').'">
@@ -108,7 +103,6 @@
 					endforeach;
 					echo '</table>';
 					break;
-
 					case 'winner':
 					if(!empty($_GET['note'])){
 						echo '<div class="alert alert-danger">  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'.$_GET['note'].'</div>';
@@ -121,24 +115,20 @@
 							<div class="form-group">
 								<label class="sr-only" for="exampleInputEmail2">username</label>
 								<input name="username" id="inputUsername" onkeyup="cekUser()" type="text" class="form-control" placeholder="verfikasi username">
-
 							</div>
 							<div class="form-group">
 								<label class="sr-only" for="exampleInputEmail2">username</label>
 								<input name="detail" type="text" class="form-control" placeholder="deskripsi juara ...">
-
 							</div>
 							<div class="form-group">
 								<label class="sr-only" for="exampleInputEmail2">username</label>
 								<input name="hadiah" type="number" class="form-control" placeholder="hadiah (Rp) tanpa koma">
-
 							</div>
 							<div class="form-group">
 								<button class="btn btn-default" type="submit">+ Pemenang</button>
 							</div>
 							<div class="input-group">								      
 								<input type="hidden" name="id" value="'.$_GET['id'].'">
-
 							</div>
 						</form>
 						<div style="display:none" id="alertnote" class="alert alert-danger">  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>
@@ -166,8 +156,6 @@
 					endforeach;
 					echo'</table>';
 					break;
-
-					
 				}
 				?>
 				<?php } else {?>
@@ -189,12 +177,9 @@
 				<?php }?>
 				<br/>
 			</div>
-
 		</div>
 		<br/>
 	</div>
-
-
 </div>
 </div>
 <br/>

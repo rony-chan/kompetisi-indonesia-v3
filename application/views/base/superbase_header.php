@@ -16,18 +16,14 @@
 			plugins:["image"]
 		});
 	</script>
-
 </head>
-
 <body style="background-color:rgb(245, 245, 245)">
-
 <div style="padding-bottom:25px;background-color:#fff">
 	<div class="container">		
 		<nav>
 			<p style="font-size:10px">Pastikan akun anda aman dari serangan</p>
 		</nav>
 		<header>
-			
 				<div class="header col-md-2 ">
 					<a href="<?php echo site_url()?>"><div class="header-img"></div></a>
 				</div>
@@ -54,7 +50,6 @@
 		</header>
 	</div>
 	<!--base end-->
-
 	<!--modal login-->
 	<div class=" modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -65,7 +60,6 @@
 				</div>
 				<div class="modal-body">
 					<p style="color:#fff"><?php echo validation_errors();?></p>
-					
 						<span class="col-md-6">
 							<form method="post" action="<?php echo site_url('publik/login')?>" role="form">
 							  <div class="form-group">
@@ -91,13 +85,11 @@
 							<a class="btn-connect twitter"  href="#">Twitter</a>
 							<a class="btn-connect g"  href="#">Google</a>
 						</span>
-
 					<hr/>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-
 	<!--modal footer-->
 	<div class=" modal fade" id="kategori" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">

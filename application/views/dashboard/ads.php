@@ -21,7 +21,6 @@
 			}
 		});
 	}
-
 	function btnMode(){
 		$('#loader').show();
 		//cek ketersediaan

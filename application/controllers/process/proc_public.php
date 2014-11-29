@@ -220,7 +220,7 @@ class proc_public extends base {
 		$username = $this->input->post('username');
 		$moto = $this->input->post('moto');
 		//jika tidak ubah password
-		if(!$new_password) {
+		if(empty($new_password)) {
 			$password = $old_password;
 		} else {
 			$password = $new_password;

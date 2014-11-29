@@ -5,7 +5,6 @@
     	$('#bln2').val(kat);
 	});
 </script>
-
 <br/>
 </h3>
 <div class="container">
@@ -14,7 +13,6 @@
 		<div class="col-md-2">
 			<?php $this->load->view('dashboard/menu');?>
 		</div>
-
 		<div style="background-color:#fff" class="col-md-10">
 			<h3>Total : <?php echo $total;?></h3>
 			<table class="table table-hover">

@@ -5,7 +5,6 @@
 		$('#main').val(kat);
 		$('#sub').val(subkat);
 	});
-
 	//call subkategori
 	function loadsubkat(){
 		$('#loading').show();
@@ -21,8 +20,6 @@
         });
 	}	
 </script>
-
-
 <br/>
 </h3>
 <div class="container">
@@ -30,7 +27,6 @@
 		<div class="col-md-2">
 			<?php $this->load->view('dashboard/menu');?>
 		</div>
-
 		<div style="background-color:#fff" class="col-md-7">
 			<h3>Pasang Kompetisi</h3>
 			<p>tanda *, adalah form yang wajib diisi</p>
@@ -49,7 +45,6 @@
 						<input name="sort" type="text" class="form-control" id="deskripsisingkat" value="<?php echo $view['sort']?>" required>
 					</div>
 				</div>
-				
 				<div class="form-group">
 					<label for="subkategori" class="col-lg-2 control-label">*Main Kategori</label>
 					<div class="col-lg-10">
@@ -59,7 +54,6 @@
 							<?php } ?>
 						</select>
 					</div>
-					
 				</div>
 				<div style="width:100%;display:none;padding:10px" id="loading">
 					<center style="color: rgb(177, 170, 170);">
@@ -76,14 +70,12 @@
 						</select>
 					</div>
 				</div>
-
 				<div class="form-group">
 					<label for="deadline" class="col-lg-2 control-label">*Deadline</label>
 					<div class="col-lg-10">
 						<input id="deadline" name="deadline" type="date" class="form-control" id="deadline" value="<?php echo $view['deadline']?>" required>
 					</div>
 				</div>
-
 				<div class="form-group">
 					<label for="pengumuman" class="col-lg-2 control-label">*Pengumuman</label>
 					<div class="col-lg-10">
@@ -153,11 +145,9 @@
 				<input type="hidden" name="id_kompetisi" value="<?php echo $view['id_kompetisi']?>">
 			</form>
 		</div>
-
 		<div class="col-md-3">
 			<p></p>
 			<p><strong>Contoh Pasang Kompetisi yang benar</strong></p>
-
 		</div>
 </div>
 <br/>

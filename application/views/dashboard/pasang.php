@@ -15,7 +15,6 @@
         });
 	}
 </script>
-
 <br/>
 </h3>
 <div class="container">
@@ -24,7 +23,6 @@
 		<div class="col-md-2">
 			<?php $this->load->view('dashboard/menu');?>
 		</div>
-
 		<div style="background-color:#fff" class="col-md-7">
 			<h3>Pasang Kompetisi</h3>
 			<p>tanda *, adalah form yang wajib diisi</p>
@@ -43,8 +41,6 @@
 						<input name="sort" type="text" class="form-control" id="deskripsisingkat" required>
 					</div>
 				</div>
-
-
 				<div class="form-group">
 					<label for="subkategori" class="col-lg-2 control-label">*Kategori</label>
 					<div class="col-lg-10">
@@ -56,16 +52,13 @@
 					</div>
 				</div>
 				<!--auto load when user select main kategori-->
-				
 				<div style="display:none" id="loading">
 					<center style="color: rgb(177, 170, 170);">
 						<img src="<?php echo base_url('dist/ajax-loader.gif')?>"/> loading subkategori
 					</center>
 				</div>
-
 				<div id="load">
 				</div>
-
 				<div style="display:none" id="next">
 					<div class="form-group">
 						<label for="deadline" class="col-lg-2 control-label">*Deadline</label>
@@ -135,13 +128,10 @@
 					</div>
 				</form>
 			</div>
-			
 		</div>
-
 		<div class="col-md-3">
 			<p></p>
 			<p><strong>Contoh Pasang Kompetisi yang benar</strong></p>
-
 		</div>
 	</div>
 </div>

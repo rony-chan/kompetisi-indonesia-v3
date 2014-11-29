@@ -5,7 +5,6 @@ $count_unverified = $this->m_kompetisi->count_unverified_participans($kompetisi[
 $count_verified = $this->m_kompetisi->count_verified_participans($kompetisi['id_kompetisi']);
 //total pemenang
 $count_winner = $this->m_kompetisi->count_winner_participans($kompetisi['id_kompetisi']);
-
 ?>
 <!-- detail kompetisi -->
 <ul class="nav nav-tabs" id="myTab">

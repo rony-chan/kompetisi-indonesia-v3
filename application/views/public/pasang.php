@@ -31,7 +31,7 @@
 		$("#arrow2").hide();
 	}
 </script>
-
+<div class="container">
 <div style="background-color:#fff" class="row">
 	<div class="col-md-12">
 		<center>
@@ -86,8 +86,6 @@
 <div style="background-color:#fff;padding:5px" class="row"></div>
 </div>	
 
-
-<body>
 
 	<section  class="line1" id="line1">
 		<div class="container">
@@ -187,3 +185,4 @@
 		</div>
 	</div>
 </section>
+</div>
