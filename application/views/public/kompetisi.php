@@ -170,7 +170,7 @@ function giveRate(x){
 				if(!empty($pemenang)){
 					echo '<h3 class="kompetisi-detail">Pemenang</h3>';
 					foreach($pemenang as $p):
-					echo '<p><a href="'.site_url('publik/profile/'.$p['username']).'">'.$p['username'].'</a> | '.$p['detail'].' | Hadiah Senilai Rp'.number_format($p['hadiah']).',-</p>';
+						echo '<p><a href="'.site_url('publik/profile/'.$p['username']).'">'.$p['username'].'</a> | '.$p['detail'].' | Hadiah Senilai Rp'.number_format($p['hadiah']).',-</p>';
 					endforeach;
 				}
 				?>
@@ -185,8 +185,61 @@ function giveRate(x){
 					<p id="linktext"><?php echo $view['sumber']?> <span><button style="display:none" onclick="copylink()" class="btn btn-default btn-xs">copy link</button></span> <span id="copied" style="display:none"><i>link copied</i></span></p>
 				</div>
 				<?php } ?>
-				<!--FB Comment-->
-				<div class="fb-comments" data-href="<?php echo site_url(uri_string())?>" data-numposts="10" data-colorscheme="light"></div>
+				<!-- komentar -->
+				<ul class="nav nav-tabs" id="komentarki">
+					<li class="active"><a href="#komentarnya">Komentar</a></li>
+					<li><a href="#facebook">Facebook</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane active" id="komentarnya">
+						<h4>Total 34 Komentar</h4>
+						<div class="komentar">
+							<div class="row col-md-12">
+								<div class="col-md-2">
+									<img style="width:100%" src="#" style="width:100%" />
+								</div>
+								<div class="col-md-10">
+									<!-- letak komentar -->
+									<p><strong><a href="#"></a></strong> <small>23 Januari 2014 12:09</small></p>
+									<p>Apakah yang harus saya lakukan untuk verifikasi data peserta saya</p>
+								</div>
+							</div>
+						</div>
+						<div class="komentar">
+							<div class="row col-md-12">
+								<div class="col-md-2">
+									<img style="width:100%" src="#" style="width:100%" />
+								</div>
+								<div class="col-md-10">
+									<!-- letak komentar -->
+									<p><strong><a href="#"></a></strong> <small>23 Januari 2014 12:09</small></p>
+									<p>Apakah yang harus saya lakukan untuk verifikasi data peserta saya</p>
+								</div>
+							</div>
+						</div>
+						<!-- balas komentar -->
+						<div class="komentar">
+							<div class="row col-md-12">
+								<div class="col-md-2">
+									<img style="width:100%" src="#" style="width:100%" />
+								</div>
+								<div class="col-md-10">
+									<!-- form balas komentar -->
+									<form action="#" method="POST" class="form">
+										<textarea class="form-control" placeholder="ada pertanyaan masukan disini"></textarea>
+										<button style="margin-top:5px;float-right"  class="btn btn-default" type="submit" >Komentar</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane" id="facebook">
+						<!--FB Comment-->
+						<div class="fb-comments" data-href="<?php echo site_url(uri_string())?>" data-numposts="10" data-colorscheme="light"></div>
+					</div>
+				</div>
+				<!-- end of komentar -->
 				<!--next/prev competition-->
 				<ul class="pager">
 					<li class="previous"><a href="#">&larr; Sebelumnya</a></li>

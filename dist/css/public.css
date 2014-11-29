@@ -203,6 +203,9 @@
      float : right;
  }
 
+ /*detail kompetisi*/
+ .komentar{padding:10px;background-color: rgb(236, 236, 236);margin-bottom: 5px}
+
  /*jelajah*/
  .jelajah-detail{color:gray;}
  .jelajah-ikon{font-size: 20px}
