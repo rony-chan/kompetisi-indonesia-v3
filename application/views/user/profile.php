@@ -123,8 +123,13 @@ class="profile">
 			</table>
 			<?php } else { //JIKA HANYA BUKA HALAMAN INFO ?>
 			<div class="row detuser">
-				<div class="col-md-1">
+				<div class="col-md-2">
+				<?php if (empty($detuser['oauth_id'])): ?>
+					<img  src="<?php echo base_url('images/avatar3.png'); ?>" alt="Kompetisi Indonesia User" />
+				<?php else: ?>
 					<img src="<?php echo 'https://graph.facebook.com/'.$detuser['oauth_id'].'/picture?return_ssl_resources=true'?>" alt="Kompetisi Indonesia User" />
+				<?php endif; ?>
+					
 				</div>
 				<div class="col-md-10">
 					<p><strong>Nama :</strong><br/>
