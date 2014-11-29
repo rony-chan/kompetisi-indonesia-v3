@@ -162,12 +162,12 @@
 					<div class="modal-body">
 						<span class="row">
 							<span class="col-md-12 login-via">
-								<center><!-- 
+								<center>
 									<span class="col-md-6">
 										<h3 style="width:50%"> <span class="glyphicon glyphicon-user"> </span><br/> Pasang dan Manajemen Kompetisi</h3><br/><br/>
-									</span> -->
+									</span>
 
-							<span class="col-md-6">
+							<!-- <span class="col-md-6">
 								<form method="post" action="<?php echo site_url('publik/login')?>" role="form">
 								  <div class="form-group">
 								    <label for="exampleInputEmail1">Username</label>
@@ -185,7 +185,7 @@
 								  <input  type="submit" class="btn btn-default" value="Log in"/>
 								 </form>
 								</span>
-
+ -->
 								<span class="col-md-6">
 											<p>login via :</p>
 											<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/fb-20x20.png'); ?>" alt="facebook login"/></span>Facebook</a>
