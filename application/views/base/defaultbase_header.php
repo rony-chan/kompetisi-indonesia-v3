@@ -184,6 +184,15 @@
 								  </div>
 								  <input  type="submit" class="btn btn-default" value="Log in"/>
 								 </form>
+<<<<<<< HEAD
+=======
+								</span> -->
+
+								<span class="col-md-6">
+									<p>login via :</p>
+									<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="http://kompetisiindonesia.com/images/icon/fb-20x20.png" alt="facebook login"/></span>Facebook</a>
+									<a class="btn-connect g"  href=""><span style="float:left"></span>Telkom ID</a>
+>>>>>>> 5e0e37aea7b7e02086de2b5f4a5d0a51bb281cbf
 								</span>
  -->
 								<span class="col-md-6">
