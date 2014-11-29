@@ -175,6 +175,7 @@ class dashboard extends base {
 		$idkompetisi = $_GET['id'];
 		$idkompetisi = $this->ki_id_dec($idkompetisi); //id kompetisi
 		$id = $this->session->userdata('id_user'); //id user
+
 		if(empty($_GET['id'])){redirect(site_url('dashboard/saya'));}
 		if(!empty($_GET['act'])){
 			switch ($_GET['act']) {
@@ -273,9 +274,18 @@ class dashboard extends base {
 					$getuser = $this->db->get('user');
 					$getuser = $getuser->row_array();
 					$iduser = $getuser['id_user'];//iduser
+					$emailuser = $getuser['email'];					
+					
 					$detail = $_POST['detail'];//detail pemenang
 					$hadiah = $_POST['hadiah'];//hadiah pemenang
+					$val_hadiah = 'Rp'.number_format($hadiah).',-';
 					$idkompetisi = $this->ki_id_dec($_POST['id']);//id kompetisi
+					$sqlkompetisi = "SELECT * FROM kompetisi WHERE id_kompetisi = ?";
+					$querykompetisi = $this->db->query($sqlkompetisi,$idkompetisi);
+					$detkompetisi = $querykompetisi->row_array();
+					$namakompetisi = $detkompetisi['judul_kompetisi'];
+					$linkkompetisi = site_url('kompetisi/detail/'.$_POST['id']);
+					$this->send_email($emailuser,$namakompetisi,$val_hadiah,$linkkompetisi);//kirim email
 					//cek apakah sudah ada datanya
 					$sqlcekpemenang = "SELECT * FROM win WHERE id_kompetisi = ".$idkompetisi." AND id_user = ".$iduser;
 					$querycekpemenang = $this->db->query($sqlcekpemenang);
