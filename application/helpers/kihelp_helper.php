@@ -4,7 +4,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	require_once 'application/controllers/base/base.php';
 	require_once 'application/libraries/oauth/library/OAuthStore.php';
 	require_once 'application/libraries/oauth/library/OAuthRequester.php';
-class telkom{
+
 	
 	public function send_email($email){
 	//ambil user id	
@@ -70,4 +70,3 @@ class telkom{
         }
 
 	}
-}
