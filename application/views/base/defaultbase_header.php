@@ -65,6 +65,10 @@
 			e.preventDefault()
 			$(this).tab('show')
 		})
+		$('#hadiah a').click(function (e) {
+			e.preventDefault()
+			$(this).tab('show')
+		})
 	});
 	
 </script>

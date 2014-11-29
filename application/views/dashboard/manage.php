@@ -56,7 +56,7 @@
 							foreach($komentar as $komen):
 								echo '<tr>';
 								echo '<td>'.$komen['waktu'].'</td>';
-								echo '<td>'.$komen['username'].'</td>';
+								echo '<td><a target="_blank" href="'.site_url('publik/profile/'.$komen['username']).'">'.$komen['username'].'</a></td>';
 								echo '<td>'.$komen['komentar'].'</td>';
 								echo '<td>'.$komen['status'].'</td>';
 								echo '<td><a class="btn btn-default btn-xs" href="#">banned</a></td>';

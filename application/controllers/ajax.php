@@ -43,4 +43,18 @@ class ajax extends base {
 			$this->db->get('meme');
 		}
 	}
+	//tambah detail juara
+	public function add_det_juara(){
+		$juara = $_GET['juara'];
+		$hadiah = $_GET['hadiah'];
+		$total = $_GET['total'];
+		$data = array('juara'=>array($juara,$hadiah,$total));
+		$this->session->set_userdata($data);
+	}
+	//lihat detail juara
+	public function show_det_juara(){
+		echo '<pre>';
+		print_r($this->session->userdata(''));
+		echo '</pre>';
+	}
 }

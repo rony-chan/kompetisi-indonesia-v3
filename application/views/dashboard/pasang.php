@@ -6,13 +6,43 @@
 		$.ajax({
 			type: "GET",
 			data: "id="+x,
-			url : "<?php echo site_url('ajax/show_sub_kat_by_id')?>",
+			url : "<?php echo site_url('ajax/show_sub_kat_by_id');?>",
 			success: function(msg) {
                 $('#load').html(msg); //get html code on controler
                 $('#loading').hide();
                 $('#next').show();                    
             }  
         });
+	}
+	function tambahJuara(){//tambah detail juara
+		juara = $('#input-juara').val();
+		hadiah = $('#input-hadiah').val();
+		total = $('#input-total').val();
+		//kirim ke controler
+		$.ajax({
+			url:'<?php echo site_url("ajax/add_det_juara");?>',
+			data:{juara:juara,hadiah:hadiah,total:total},
+			success:function(msg){//daftar detail juara
+				showJuara();//menampilkan detail juara
+				$('#input-juara').val('');
+				$('#input-hadiah').val('');
+				$('#input-total').val('');
+			},
+			error:function(){//gagal
+				alert('gagal memasukan data, silahkan coba lagi');
+			}
+		});
+	}
+	function showJuara(){//show detail juara
+		$.ajax({
+			url:'<?php echo site_url("ajax/show_det_juara");?>',
+			success:function(response){
+				$('#showJuara').html(response);
+			},
+			error:function(){
+				alert('gagal load data, silahkan coba lagi');
+			}
+		});		
 	}
 </script>
 
@@ -43,8 +73,6 @@
 						<input name="sort" type="text" class="form-control" id="deskripsisingkat" required>
 					</div>
 				</div>
-
-
 				<div class="form-group">
 					<label for="subkategori" class="col-lg-2 control-label">*Kategori</label>
 					<div class="col-lg-10">
@@ -55,17 +83,14 @@
 						</select>
 					</div>
 				</div>
-				<!--auto load when user select main kategori-->
-				
+				<!--auto load when user select main kategori-->				
 				<div style="display:none" id="loading">
 					<center style="color: rgb(177, 170, 170);">
 						<img src="<?php echo base_url('dist/ajax-loader.gif')?>"/> loading subkategori
 					</center>
 				</div>
-
 				<div id="load">
 				</div>
-
 				<div style="display:none" id="next">
 					<div class="form-group">
 						<label for="deadline" class="col-lg-2 control-label">*Deadline</label>
@@ -85,26 +110,76 @@
 							<input name="penyelenggara" type="text" class="form-control" id="penyelenggara" required>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="total" class="col-lg-2 control-label">*Nilai Total Hadiah</label>
-						<div class="col-lg-10">
-							<h6>Penulisan tanpa tanda (.) titik atau (,) koma</h6>
-							<h6>Contoh : 5000000</h6>
-							<div class="input-group">
-								<span class="input-group-addon">Rp.</span>
-								<input name="total" type="number" class="form-control" id="total" required>
-								<span class="input-group-addon">.00</span>
+					<strong>*) Pilih metode detail hadiah</strong><br/><br/>
+					<ul class="nav nav-tabs" id="hadiah">
+						<li class="active"><a href="#default">Default</a></li>
+						<li><a href="#advance">Advance</a></li>
+					</ul>
+					<!-- metode pemilihan hadiah -->
+					<div style="background-color:rgb(236, 236, 236);padding:5px" class="tab-content">
+						<div class="tab-pane active" id="default">
+							<div class="form-group">
+								<label for="total" class="col-lg-2 control-label">*Nilai Total Hadiah</label>
+								<div class="col-lg-10">
+									<h6>Penulisan tanpa tanda (.) titik atau (,) koma</h6>
+									<h6>Contoh : 5000000</h6>
+									<div class="input-group">
+										<span class="input-group-addon">Rp.</span>
+										<input name="total" type="number" class="form-control" id="total" required>
+										<span class="input-group-addon">.00</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="hadiah" class="col-lg-2 control-label">*Detail Hadiah:</label>
+								<div class="col-lg-10">
+									<h6>Contoh : juara 1 : iPad 32GB | juara 2 : iPhone 5 32GB | Juara 3 : iPhone 5 8GB </h6>
+									<h6>atau hadiah akan diberikan kepada 5 juara favorit</h6>
+									<textarea name="hadiah" class="form-control" id="hadiah" maxlength="500" required></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane" id="advance">
+							<!-- form tambah detail hadiah -->
+							<div class="col-md-12">
+								<div class="form-inline">
+									<div style="margin:0" class="form-group">
+										<label class="sr-only" for="exampleInputEmail2">Email address</label>
+										<input id="inputJuara" type="text" class="input-sm form-control" id="exampleInputEmail2" placeholder="contoh : Juara 1">
+									</div>
+									<div style="margin:0" class="form-group">
+										<label class="sr-only" for="exampleInputPassword2">Password</label>
+										<input id="inputHadiah" type="text" class="input-sm form-control" id="exampleInputPassword2" placeholder="contoh : iPad mini">
+									</div>
+									<div style="margin:0" class="form-group">
+										<label class="sr-only" for="exampleInputPassword2">Nilai</label>
+										<input id="inputTotal" type="number" class="input-sm form-control" id="exampleInputPassword2" placeholder="contoh : 5000000">
+									</div>								
+									<button onclick="tambahJuara()" class="btn btn-default btn-xs">+</button>
+								</div>
+								<table id="showJuara" class="table table-striped">
+									<tr>
+										<td>Juara 1</td>
+										<td>Trip ke Bali</td>
+										<td>Rp 56.000.000,-</td>
+										<td>
+											<a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
+										</td>
+									</tr>
+									<tr>
+										<td>Juara 1</td>
+										<td>Trip ke Bali</td>
+										<td>Rp 56.000.000,-</td>
+										<td>
+											<a href="#" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
+										</td>
+									</tr>
+								</table>
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="hadiah" class="col-lg-2 control-label">*Detail Hadiah:</label>
-						<div class="col-lg-10">
-							<h6>Contoh : juara 1 : iPad 32GB | juara 2 : iPhone 5 32GB | Juara 3 : iPhone 5 8GB </h6>
-							<h6>atau hadiah akan diberikan kepada 5 juara favorit</h6>
-							<textarea name="hadiah" class="form-control" id="hadiah" maxlength="500" required></textarea>
-						</div>
-					</div>
+					<!-- end of hadiah -->
+					
 					<div class="form-group">
 						<label for="deskripsilengkap" class="col-lg-2 control-label">* Deskripsi Lengkap</label>
 						<div class="col-lg-10">
