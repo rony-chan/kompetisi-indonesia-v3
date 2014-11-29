@@ -47,8 +47,6 @@ CREATE TABLE IF NOT EXISTS `ads` (
 -- Dumping data for table `ads`
 --
 
-INSERT INTO `ads` (`id_ads`, `req_by`, `req_date`, `start_date`, `end_date`, `banner`, `ads_type`, `status`, `views`) VALUES
-(2, 2, '2014-11-18 13:21:35', '2014-11-20 00:00:00', '2014-11-22 00:00:00', 'banner_yussan.png', 1, 'unread', NULL);
 
 -- --------------------------------------------------------
 
@@ -68,12 +66,6 @@ CREATE TABLE IF NOT EXISTS `ads_type` (
 --
 -- Dumping data for table `ads_type`
 --
-
-INSERT INTO `ads_type` (`id_ads_type`, `name`, `description`, `image_example`, `rp_per_day`) VALUES
-(1, 'Jelajah View', '<p>Menampilkan ads anda di http://kompetisiindonesia.com/jelajah, dengan posisi atas list kompetisi, dan keluar tiap 10 kompetisi</p>\r\n<p>Ukuran banner :\r\n600x150</p>\r\n<p></p>', '', 30000),
-(2, 'Bottom Fixed View', '<p>Menampilkan ads anda di semua halaman publik kompetisi Indonesia, dengan posisi paling bawah dan tidak pernah berubah.</p>\r\n<p>Ukuran banner :\r\n600x80</p>', '', 40000),
-(3, 'Detail View 1', '<p>Ads tampil dihalaman detail kompetisi,tepatnya ditas judul.</p>\r\n<p>Ukuran banner :\r\n500x200</p>', '', 30000),
-(4, 'Detail View 2', '<p>Ads tampil dibagian sidebar kompetisi,tepatnya diatas kompetisi favorit.</p>\r\n<p>Ukuran banner :\r\nsquare250x250</p>', '', 20000);
 
 -- --------------------------------------------------------
 
