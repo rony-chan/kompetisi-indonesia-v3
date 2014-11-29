@@ -197,7 +197,9 @@ class dashboard extends base {
 		if(!empty($_GET['act'])){
 			switch ($_GET['act']) {
 				case 'komentar':
+					$params = array($idkompetisi,$id);
 					$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#komentar\').addClass(\'active \');});</script>';
+					$data['komentar'] = $this->m_kompetisi->show_komentar_by_kompetisi_user($params);
 					break;
 				case 'unverify':
 					$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#unverify\').addClass(\'active \');});</script>';
@@ -220,10 +222,10 @@ class dashboard extends base {
 		} else {
 			$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');$(\'#detail\').addClass(\'active \');});</script>';
 		}
-		
-		$data['ikut'] = $this->m_kompetisi->count_diikuti_kompetisi($id);
-		$data['tandai'] = $this->m_kompetisi->count_tandai_kompetisi($id);
-		$data['kompetisiku'] = $this->m_kompetisi->count_kompetisiku($id);
+		$data['count_komentar'] = $this->m_kompetisi->count_komentar_by_idkompetisi($idkompetisi);//total komentar
+		$data['ikut'] = $this->m_kompetisi->count_diikuti_kompetisi($id);//total pengikut
+		$data['tandai'] = $this->m_kompetisi->count_tandai_kompetisi($id);//total penandau
+		$data['kompetisiku'] = $this->m_kompetisi->count_kompetisiku($id);//total kompetisi
 		$sqlkompetisi = $this->db->get_where('kompetisi',array('id_kompetisi'=>$idkompetisi));
 		//cek apakah kompetisi tersedia
 		if($sqlkompetisi->num_rows()<0){

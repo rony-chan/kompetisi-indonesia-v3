@@ -113,6 +113,9 @@ class kompetisi extends base {
 		$data['btn'] = $this->m_kompetisi->cek_btn($params);
 		$data['ditandai'] = $this->m_kompetisi->count_tandai($id_kompetisi);
 		$data['gabung'] = $this->m_kompetisi->count_gabung($id_kompetisi);		
+		//komentar
+		$data['komentar'] = $this->m_kompetisi->show_komentar_by_kompetisi($id_kompetisi);
+		$data['count_komentar'] = $this->m_kompetisi->count_komentar_by_idkompetisi($id_kompetisi);
 		//judul di title bar
 		$tit = $this->m_kompetisi->title_kompetisi($id_kompetisi);
 		$data['view'] = $this->m_kompetisi->get_competition_by_id_kompetisi($id_kompetisi);
@@ -132,6 +135,9 @@ class kompetisi extends base {
 	//////////////////////////////////////
 
 	public function add_komentar(){ //parameter adalah id kompetisi dan id user
+		if(empty($this->session->userdata('id_user'))){
+			redirect(site_url('kompetisi/detail/'.$_POST['id_kompetisi']));//kembali ke detail kompetisi
+		}
 		$iduser  = $this->session->userdata('id_user'); //get id user
 		$idkompetisi = $this->ki_id_dec($_POST['id_kompetisi']);//get id kompetisi
 		$komentar = $_POST['input_komentar'];
@@ -142,7 +148,7 @@ class kompetisi extends base {
 			'id_user'=>$iduser,
 			'status'=>'active');
 		if($this->db->insert('komentar',$params)){
-			redirect(site_url(''));
+			redirect($this->agent->referrer());//kembali ke detail kompetisi
 		} else {
 			echo 'gagal memasukan komentar';
 		}

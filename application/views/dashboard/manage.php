@@ -45,7 +45,24 @@
 					<?php if(isset($_GET['act'])){
 						switch ($_GET['act']) {
 							case 'komentar':
-								# code...
+							echo '<h4>Komentar Sebagai CH</h4>';
+							echo '<form action="'.site_url('kompetisi/add_komentar').'" method="POST" class="form">
+									<textarea name="input_komentar" style="width:100%" class="form-control" placeholder="ada pertanyaan masukan disini"></textarea>
+									<input type="hidden" name="id_kompetisi" value="'.$_GET['id'].'">
+									<button style="margin-top:5px;float-right"  class="btn btn-default" type="submit" >Komentar</button>
+								</form>';
+							echo '<div class="col-md-12"><table class="table">';
+							echo '<tr><th>Tanggal</th><th>Username</th><th>Komentar</th><th>Status</th><th></th></tr>';
+							foreach($komentar as $komen):
+								echo '<tr>';
+								echo '<td>'.$komen['waktu'].'</td>';
+								echo '<td>'.$komen['username'].'</td>';
+								echo '<td>'.$komen['komentar'].'</td>';
+								echo '<td>'.$komen['status'].'</td>';
+								echo '<td><a class="btn btn-default btn-xs" href="#">banned</a></td>';
+								echo '</tr>';
+							endforeach;
+							echo '</table></div>';
 							break;
 
 							case 'unverify':
@@ -151,33 +168,33 @@
 					break;
 
 					
-					}
-					?>
-					<?php } else {?>
-					<div class="col-md-2"><img style="width:100%" src="<?php echo base_url('images/poster/'.$kompetisi['poster'])?>"/></div>
-					<div class="col-md-5">
-						<h4>Spesifikasi</h4>
-						<hr/>
-						<p><strong>Deadline : </strong> <?php echo date('d-m-Y',strtotime($kompetisi['deadline']));?></p>
-						<p><strong>Pengumuman : </strong> <?php echo date('d-m-Y',strtotime($kompetisi['pengumuman']));?></p>
-						<p><strong>Hadiah :</strong> <?php echo $kompetisi['hadiah'];?></p>
-						<hr/>
-					</div>
-					<div class="col-md-5">
-						<h4>Syarat dan Ketentuan</h4>
-						<hr/>
-						<?php echo $kompetisi['konten'];?>
-						<hr/>
-					</div>
-					<?php }?>
-					<br/>
+				}
+				?>
+				<?php } else {?>
+				<div class="col-md-2"><img style="width:100%" src="<?php echo base_url('images/poster/'.$kompetisi['poster'])?>"/></div>
+				<div class="col-md-5">
+					<h4>Spesifikasi</h4>
+					<hr/>
+					<p><strong>Deadline : </strong> <?php echo date('d-m-Y',strtotime($kompetisi['deadline']));?></p>
+					<p><strong>Pengumuman : </strong> <?php echo date('d-m-Y',strtotime($kompetisi['pengumuman']));?></p>
+					<p><strong>Hadiah :</strong> <?php echo $kompetisi['hadiah'];?></p>
+					<hr/>
 				</div>
-
+				<div class="col-md-5">
+					<h4>Syarat dan Ketentuan</h4>
+					<hr/>
+					<?php echo $kompetisi['konten'];?>
+					<hr/>
+				</div>
+				<?php }?>
+				<br/>
 			</div>
-			<br/>
+
 		</div>
-
-
+		<br/>
 	</div>
+
+
+</div>
 </div>
 <br/>

@@ -857,10 +857,12 @@ class m_kompetisi extends CI_Model{
 
 	// lihat komentar berdasarkan kompetisi
 	public function show_komentar_by_kompetisi($id){//id kompetisi
-		$sql = "SELECT komentar, id_komentar, user.username AS 'username', user.oauth_provider AS 'provider'
+		$sql = "SELECT komentar.status AS 'status',waktu,komentar, id_komentar, user.username AS 'username', user.oauth_provider AS 'provider',
 		user.oauth_id AS 'oauth_id'
-		FROM komentar INNER JOIN user ON komentar.id_user = user.id_user
-		WHERE komentar.id_kompetisi = ?";
+		FROM komentar 
+		INNER JOIN user ON komentar.id_user = user.id_user
+		WHERE komentar.id_kompetisi = ?
+		ORDER BY komentar.id_komentar DESC";
 		//eksekusi
 		$query = $this->db->query($sql,$id);
 		if($query->num_rows()>0) { //jika ada komentar
@@ -869,16 +871,21 @@ class m_kompetisi extends CI_Model{
 			return array();
 		}
 	}
-
+	//hitung total kompetisi
+	public function count_komentar_by_idkompetisi($id){//id kompetisi
+		$this->db->where('id_kompetisi',$id);
+		return $this->db->count_all_results('komentar');
+	}
 	//lihat komentar berdasarkan id_user dan kompetisi
 	public function show_komentar_by_kompetisi_user($params){ //idkompetisi dan iconv(in_charset, out_charset, str)duser
-		$sql = "SELECT komentar, id_komentar, user.username AS 'username', user.oauth_provider AS 'provider'
+		$sql = "SELECT komentar.status AS 'status',waktu,komentar, id_komentar, user.username AS 'username', user.oauth_provider AS 'provider',
 		user.oauth_id AS 'oauth_id'
 		FROM komentar 
 		INNER JOIN user ON komentar.id_user = user.id_user
 		INNER JOIN kompetisi ON kompetisi.id_kompetisi = komentar.id_kompetisi
-		WHERE komentar.id_kompetisi = ? 
-		AND kompetisi.author = ?";
+		WHERE komentar.id_kompetisi = ?
+		AND kompetisi.author = ?
+		ORDER BY komentar.id_komentar DESC";
 		//eksekusi
 		$query = $this->db->query($sql,$params);
 		if($query->num_rows()>0) { //jika ada komentar

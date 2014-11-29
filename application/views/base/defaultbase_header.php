@@ -62,8 +62,8 @@
 	// bootstrap tab
 	$(document).ready(function(){
 		$('#komentarki a').click(function (e) {
-		e.preventDefault()
-		$(this).tab('show')
+			e.preventDefault()
+			$(this).tab('show')
 		})
 	});
 	
@@ -99,94 +99,109 @@
 							?>
 							<?php
 							if($this->session->userdata('id_user') != ""):?>
-								<a href="#" >
-									<li style="padding:0 0 0 10px">			
-										<div class="dropdown pull-right">
-											<a data-toggle="dropdown" href="#">
+							<a href="#" >
+								<li style="padding:0 0 0 10px">			
+									<div class="dropdown pull-right">
+										<a data-toggle="dropdown" href="#">
 											<?php if (empty($this->session->userdata('oauth_id'))): ?>
 
-											<img style="margin-right:5px;width:40px;height:40px" src="<?php echo base_url('images/avatar3.png'); ?>" alt="kompetisi indonesia user"/>
+												<img style="margin-right:5px;width:40px;height:40px" src="<?php echo base_url('images/avatar3.png'); ?>" alt="kompetisi indonesia user"/>
 
 											<?php else: ?>
+												<?php
+												switch ($this->session->userdata('oauth_provider')) {
+												case 'facebook'://facebook
+												$ppsaya = 'https://graph.facebook.com/'.$this->session->userdata('oauth_id').'/picture?width=9999';
+												break;
+
+												case 'telkomid'://telkom id
+												# code...
+												break;
 												
-											<img style="margin-right:5px;width:40px;height:40px" src="https://graph.facebook.com/<?php $this->session->userdata('oauth_id'); ?>/picture?return_ssl_resources=true" alt="kompetisi indonesia user"/>
-											<?php endif; ?>
-											<?php echo $this->session->userdata('username'); ?><span class="caret"></span></a>
-											<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-												<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/profile/'.$username) ?>" >View Profile</a></li>
-												<li style="width:100%;padding:0"><a href="<?php echo site_url('dashboard'); ?>" >Dasbor</a></li>												
-												<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/logout'); ?>" >Logout</a></li>
-											</ul>
+												default:
+												$ppsaya = base_url('images/avatar3.png');//default profile picture
+												break;
+											}
+											?>
+											<img style="margin-right:5px;width:40px;height:40px" src="<?php echo $ppsaya;?>" alt="kompetisi indonesia user"/>
+											
+										<?php endif; ?>
+										<?php echo $this->session->userdata('username'); ?><span class="caret"></span></a>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+											<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/profile/'.$username) ?>" >View Profile</a></li>
+											<li style="width:100%;padding:0"><a href="<?php echo site_url('dashboard'); ?>" >Dasbor</a></li>												
+											<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/logout'); ?>" >Logout</a></li>
+										</ul>
+									</div>
+								</li></a>
+							<?php else: ?>
+								<li><a href="#login" data-toggle="modal">Login</a></li>
+							<?php endif; ?>
+							<li><a href="<?php echo site_url('pasangkompetisi')?>">Pasang</a></li>
+							<li><a href="<?php echo site_url('start/kompetisi/jelajah')?>">Jelajah</a></li>
+							<li><a href="<?php echo site_url('publik/read/TVRZPQ/Testimoni')?>">Testimoni</a></li>
+							<li><a href="<?php echo site_url('start/kompetisi/news')?>">News</a></li>
+							<li><a href="<?php echo site_url('publik/read/TWpBPQ/Bantuan')?>">Bantuan</a></li>
+						</ul>
+					</div>
+				</div>
+			</header>
+		</div>			
+		<!--base end-->    
+
+
+	</div>
+	<div class="base-heading-space" class="row"></div>
+	<!--JS-->
+	<!--modal footer-->
+	<div class=" modal fade" id="kategori" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">...</h4>
+				</div>
+				<div class="modal-body">
+					...
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!--modal login-->
+	<div class=" modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Kompetisi Indonesia Login</h4>
+				</div>
+				<div class="modal-body">
+					<span class="row">
+						<span class="col-md-12 login-via">
+							<center>
+								<span class="col-md-6">
+									<h3 style="width:50%"> <span class="glyphicon glyphicon-user"> </span><br/> Pasang dan Manajemen Kompetisi</h3><br/><br/>
+								</span>
+
+								<span class="col-md-6">
+									<form method="post" action="<?php echo site_url('publik/login')?>" role="form">
+										<div class="form-group">
+											<label for="exampleInputEmail1">Username</label>
+											<input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Username" required>
 										</div>
-									</li></a>
-								<?php else: ?>
-									<li><a href="#login" data-toggle="modal">Login</a></li>
-								<?php endif; ?>
-								<li><a href="<?php echo site_url('pasangkompetisi')?>">Pasang</a></li>
-								<li><a href="<?php echo site_url('start/kompetisi/jelajah')?>">Jelajah</a></li>
-								<li><a href="<?php echo site_url('publik/read/TVRZPQ/Testimoni')?>">Testimoni</a></li>
-								<li><a href="<?php echo site_url('start/kompetisi/news')?>">News</a></li>
-								<li><a href="<?php echo site_url('publik/read/TWpBPQ/Bantuan')?>">Bantuan</a></li>
-							</ul>
-						</div>
-					</div>
-				</header>
-			</div>			
-			<!--base end-->    
-
-			
-		</div>
-		<div class="base-heading-space" class="row"></div>
-		<!--JS-->
-		<!--modal footer-->
-		<div class=" modal fade" id="kategori" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">...</h4>
-					</div>
-					<div class="modal-body">
-						...
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-
-		<!--modal login-->
-		<div class=" modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Kompetisi Indonesia Login</h4>
-					</div>
-					<div class="modal-body">
-						<span class="row">
-							<span class="col-md-12 login-via">
-								<center>
-									<span class="col-md-6">
-										<h3 style="width:50%"> <span class="glyphicon glyphicon-user"> </span><br/> Pasang dan Manajemen Kompetisi</h3><br/><br/>
-									</span>
-
-							<span class="col-md-6">
-								<form method="post" action="<?php echo site_url('publik/login')?>" role="form">
-								  <div class="form-group">
-								    <label for="exampleInputEmail1">Username</label>
-								    <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Username" required>
-								  </div>
-								  <div class="form-group">
-								    <label for="exampleInputPassword1">Password</label>
-								    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
-								  </div>
-								  <div class="checkbox">
-								    <label>
-								      <input type="checkbox"> Ingat saya
-								    </label>
-								  </div>
-								  <input  type="submit" class="btn btn-default" value="Log in"/>
-								 </form>
-							</span>
+										<div class="form-group">
+											<label for="exampleInputPassword1">Password</label>
+											<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+										</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox"> Ingat saya
+											</label>
+										</div>
+										<input  type="submit" class="btn btn-default" value="Log in"/>
+									</form>
+								</span>
 
 								<span class="col-md-6">
 									<p>login via :</p>
@@ -201,12 +216,12 @@
 											<a class="btn-connect g"  href="<?php echo site_url('auth/twitter')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/g-20x20.png'); ?>" alt="google+ login"/></span>Google+</a>
 										</span> -->
 
-							</center>
-						</span>
-					</span>
+									</center>
+								</span>
+							</span>
 
-					<hr/>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->	
+							<hr/>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->	
