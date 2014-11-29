@@ -199,7 +199,7 @@ function giveRate(x){
 								<?php
 									//manage username
 								if($komen['username'] == $view['author']){
-										$username = 'Penyelenggara : '.$komen['username']; //jika yang komentar adalah penyelenggara kompetisi
+										$username = 'Penyelenggara :: '.$komen['username']; //jika yang komentar adalah penyelenggara kompetisi
 									} else {
 										$username = $komen['username']; //jika yang komen adalah peserta
 									}
