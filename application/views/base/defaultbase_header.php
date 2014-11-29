@@ -130,7 +130,7 @@
 								<li><a href="#login" data-toggle="modal">Login</a></li>
 							<?php endif; ?>
 							<li><a href="<?php echo site_url('pasangkompetisi')?>">Pasang</a></li>
-							<li><a href="<?php echo site_url('start/kompetisi/jelajah')?>">Jelajah</a></li>
+							<li><a href="<?php echo site_url('jelajah')?>">Jelajah</a></li>
 							<li><a href="<?php echo site_url('publik/read/TVRZPQ/Testimoni')?>">Testimoni</a></li>
 							<li><a href="<?php echo site_url('start/kompetisi/news')?>">News</a></li>
 							<li><a href="<?php echo site_url('publik/read/TWpBPQ/Bantuan')?>">Bantuan</a></li>
