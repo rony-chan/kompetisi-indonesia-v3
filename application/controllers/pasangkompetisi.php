@@ -1,17 +1,13 @@
 <?php
-
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //memanggil file base untuk melakukan penurunan
 require_once 'application/controllers/base/base.php';
-
-
 class pasangkompetisi extends base {
 	//membuat construktor
 	public function __construct() {
 		parent::__construct();
 		date_default_timezone_set('Asia/Jakarta');
 	}
-
 	//pasang function
 	public function index() {
 		//urusan captcha
@@ -19,7 +15,6 @@ class pasangkompetisi extends base {
 		$minutes = date('m');
 		$second = date('s');
 		$key = $tgl * $minutes * $second ;
-		
 		$vals = array(
 			'word' => $key,
 	        'img_path'   => './captcha/',

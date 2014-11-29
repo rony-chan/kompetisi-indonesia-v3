@@ -44,7 +44,6 @@ class json extends base {
 						$kompetisi = $this->m_kompetisi->json_kompetisi_sort_more($keyword,$cat,$lastid);
 					}
 					break;
-
 				default: //if not set action
 					echo '<center><h1>ERROR 404 : </h1></center>';
 					break;
@@ -101,6 +100,5 @@ class json extends base {
 	}
 	//detail kompetisi
 	public function detail(){
-
 	}
 }

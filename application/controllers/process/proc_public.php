@@ -1,21 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //memanggil file base untuk melakukan penurunan
 require_once 'application/controllers/base/base.php';
-
-
 class proc_public extends base {
-
 	//membuat construktor
 	public function __construct() {
 		parent::__construct();
 	}
-
-
 	/////////////////////////////////// request ///////////////////////////////////
 	public function add_request() {
 		//cek captcha
 		if($this->input->post('security_code') == $this->session->userdata('mycaptcha')){
-
 			//button mana yang di klik
 			if(isset($_POST['btn_poster'])){ //klik button poster
 				//get data
@@ -24,7 +18,6 @@ class proc_public extends base {
 				$link = $this->input->post('link');
 				$gambar = $_FILES['poster'];
 				$gambar_name = str_replace(" ", "_", $gambar['name']);
-
 				$this->load->library('upload');
 				$config['upload_path'] = 'images/poster/';
 				$config['allowed_types'] = 'gif|jpg|jpeg';
@@ -33,7 +26,6 @@ class proc_public extends base {
 				// $config['remove_spaces'] = true;
 				$params = array('nama' => $nama, 'email' => $email, 'link' => $link, 'poster' => $gambar_name, 'status' => 'waiting');
 				$this->upload->initialize($config);
-
 				if($this->upload->do_upload('poster')) { //if poster succes upload
 					$this->m_request->add_kompetisi($params);
 					echo $this->upload->display_errors();
@@ -53,7 +45,6 @@ class proc_public extends base {
 				$email = $this->input->post('email');
 				$link = $this->input->post('link');
 				$params = array('nama' => $nama, 'email' => $email, 'link' => $link, 'poster' => 0, 'status' => 'waiting');
-
 				if($this->m_request->add_kompetisi($params)){
 					echo ("<SCRIPT LANGUAGE='JavaScript'>
 						window.alert('Link Berhasil Dipasang');
@@ -65,25 +56,17 @@ class proc_public extends base {
 						window.location.href='".site_url()."';
 					</SCRIPT>");
 				}
-				
-
 			} else if(isset($_POST['btn_form'])) { //klik button form
-
 			} else { //tidak ada yang di klik
 				header("location:site_url()");
 			}
-
-			
 		} else { //captcha salah
-			
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
 				window.alert('kode keamanan salah, silahkan ulangi lagi');
 				window.location.href='".site_url()."';
 			</SCRIPT>");
 		}		
-
 	}
-
 	public function pasang(){ //function untuk menambah kompetisi oleh user
 		if(isset($_POST['btn_pasang'])) {
 			$author = $this->session->userdata('id_user');//id user
@@ -99,7 +82,6 @@ class proc_public extends base {
 			$hadiah = $this->input->post('hadiah');//detail hadiah
 			$link = $this->input->post('link');//link sumber kompetisi
 			$gambar = $_FILES['poster'];//poster
-			
 			//jika upload poster
 			if(isset($_FILES['poster'])) {
 				$gambar_nama = str_replace(' ', '_', $gambar['name']); //rename ' ' menjadi '-'
@@ -112,13 +94,10 @@ class proc_public extends base {
 				$this->upload->initialize($config);
 				$this->upload->do_upload('poster');
 				echo $this->upload->display_errors();			
-				
 			} else {
 				$gambar_nama = '';
 			}
-
 			$params = array($judul, $sort, $gambar_nama, $penyelenggara,$konten, $author, $mainkat,$subkat, $deadline, $pengumuman,	$total, $hadiah, $link,$konten); //untuk diinput kedatabase
-			
 			if($this->m_kompetisi->pasang($params)) { //jika insert data ke database
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('Pasang Kompetisi Berhasil');
@@ -131,7 +110,6 @@ class proc_public extends base {
 				</SCRIPT>");
 				//redirect(site_url('dashboard')); //jika tidak menekan brn_pasang maka akan diredirect ke dashboard
 			}
-
 		} else {
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
 				window.alert('terjadi kesalahan, silahkan coba lagi');
@@ -140,7 +118,6 @@ class proc_public extends base {
 			//redirect(site_url('dashboard')); //jika tidak menekan brn_pasang maka akan diredirect ke dashboard
 		}	
 	}
-
 	public function edit(){ //edit postingan yang dibuat oleh user
 		if(isset($_POST)) {
 			$author = $this->session->userdata('id_user');//id user
@@ -177,16 +154,13 @@ class proc_public extends base {
 			} else if(isset($_POST['btn_draft'])) {
 				$status = 'draft';
 			}
-
 			$params = array($judul, $sort, $gambar_nama, $penyelenggara,$konten, $mainkat,$subkat, $deadline, $pengumuman,	$total, $hadiah, $link, $status,$id_kompetisi, $status); //untuk diinput kedatabase
-			
 			if($this->m_kompetisi->edit($params)) { //jika insert data ke database
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('Update Berhasil');
 					window.location.href='../../dashboard/saya';
 				</SCRIPT>");
 			} else {
-
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('terjadi kesalahan, silahkan coba lagi');
 					window.location.href='../../dashboard/saya';
@@ -200,7 +174,6 @@ class proc_public extends base {
 			//redirect(site_url('dashboard')); //jika tidak menekan brn_pasang maka akan diredirect ke dashboard
 		}	
 	}
-
 	//ketika button ditandai di kompetisi/detail di klik
 	public function kompetisi_btn(){
 		$action = $_GET['act'];//next action
@@ -217,31 +190,26 @@ class proc_public extends base {
 			$this->db->query($sql, $params);
 			redirect(site_url('/kompetisi/detail/'.$id.'/'.$judul));
 			break;
-
 			case 'ungabung': //jika button gabung di klik
 			$sql = "UPDATE kompetisi_btn SET gabung = 0 WHERE id_kompetisi = ? AND id_user = ?";
 			$this->db->query($sql, $params);
 			redirect(site_url('/kompetisi/detail/'.$id.'/'.$judul));
 			break;
-
 			case 'tandai': //jika button gabung di klik
 			$sql = "UPDATE kompetisi_btn SET tandai = 1 WHERE id_kompetisi = ? AND id_user = ?";
 			$this->db->query($sql, $params);
 			redirect(site_url('/kompetisi/detail/'.$id.'/'.$judul));
 			break;
-
 			case 'untandai': //jika button gabung di klik
 			$sql = "UPDATE kompetisi_btn SET tandai = 0 WHERE id_kompetisi = ? AND id_user = ?";
 			$this->db->query($sql, $params);
 			redirect(site_url('/kompetisi/detail/'.$id.'/'.$judul));
 			break;
-			
 			default:
 				# code...
 			break;
 		}
 	}
-
 	//fungsi untuk edit profile
 	function edit_profile(){
 		$id = $this->input->post('id_user');
@@ -257,7 +225,6 @@ class proc_public extends base {
 		} else {
 			$password = $new_password;
 		}
-
 		$params = array($username, $password, $nama, $email, $moto,$id);
 		//validation
 		$this->load->library('form_validation');
@@ -276,9 +243,7 @@ class proc_public extends base {
 				</SCRIPT>");			
 			}
 		}
-		
 	}
-
 	public function confirm_update(){
 		//memanggil view login_confirm
 		echo ("<SCRIPT LANGUAGE='JavaScript'>
@@ -286,22 +251,16 @@ class proc_public extends base {
 			window.location.href='".site_url('publik/logout')."';
 		</SCRIPT>");
 	}
-
-
 	///////////////////////////////////////////////////////////////
 	///////////////// SOCIAL NETWORK API /////////////////////////
-
 	public function register_facebook(){ //register with facebook
-
 	}
-
 	public function login_facebook(){ //login with facebook
 		require 'oauth/fb/facebook.php';
 		$facebook = new Facebook (array(
 			'appId' => '1419514554927551',
 			'secret' => '2b82a334fe3cdbb86eac5095aa46b6f8',
 		));
-
 		//Get User ID
 		$user = $facebook->getUser();
 		if(!empty($user)) { //jika user sudah login facebook
@@ -311,9 +270,7 @@ class proc_public extends base {
 				error_log($e);
 				$user = null;
 			}			
-
 			if(!empty($user_profile)) { //jika user profile kosong
-
 				//cek apakah user sudah mendaftar atau belum
 				if($this->m_oauth_fb($params)){
 					//set session
@@ -329,9 +286,7 @@ class proc_public extends base {
 						window.location.href='".site_url()."';
 					</SCRIPT>");
 				}
-				
 			}
-
 		} else { //jika user belum login facebook
 			$login_url = $facebook->getLoginUrl();
 			header("Location : ".$login_url);

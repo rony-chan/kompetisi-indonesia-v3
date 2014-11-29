@@ -1,17 +1,12 @@
 <?php
-
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //memanggil file base untuk melakukan penurunan
 require_once 'application/controllers/base/base.php';
-
-
 class kompetisi extends base {
-
 	//membuat construktor
 	public function __construct() {
 		parent::__construct();
 	}
-
 	//tampilan index
 	public function index(){
 		$data['title'] = "";
@@ -31,12 +26,10 @@ class kompetisi extends base {
 		$this->defaultdisplay('public/home', $data);
 		$this->footerdisplay();
 	}
-
 	//tampilan news dari kompetisi indonesia
 	public function news(){
 		//fungsi untuk menampilkan postingan
 		$data['title'] = 'News | ';
-
 		//$this->load->library('pagination');
 		$this->load->library('pagination');
 		$config['base_url'] = site_url('start/kompetisi/news');
@@ -55,19 +48,15 @@ class kompetisi extends base {
 			$data['page'] = $this->pagination->create_links();
 		}
 		//end of pagination set up
-
 		$data['view'] = $this->m_post->all_post($config['per_page'],$uri);
 		$this->defaultdisplay('public/post_all', $data);
 		$this->footerdisplay();
 	}
-
 	//list semua kompetisi aktif
 	public function jelajah() {
-
 		$data['title'] = "Jelajah | ";		
 		$data['kategori'] = $this->m_kompetisi->list_kategori(); //menampilkan kategori di top menu
 		$this->load->library('pagination');
-
 		//pagination set up		
 		$config['per_page'] = 20;
 		$config['uri_segment'] = 4;
@@ -91,7 +80,6 @@ class kompetisi extends base {
 		$config['last_link'] = '&gt;&gt;';
 		$config['last_tag_open'] = '<li>';
 		$config['last_tag_close'] = '</li>';
-		
 		//end of pagination set up
 		if(!$_GET){ //jika tidak ada element get
 			$config['base_url'] = site_url('start/kompetisi/jelajah');
@@ -113,7 +101,6 @@ class kompetisi extends base {
 			$config['page_query_string'] = TRUE;
 			$config['base_url'] = site_url().'/start/kompetisi/jelajah?kat=0&q='.$this->input->get('q', TRUE);
 			$config['total_rows'] = $this->m_kompetisi->count_search_jelajah($q);//menghitung total kompetisi yang aktif
-			
 			if(isset($_GET['per_page'])) {
 				$uri = $_GET['per_page'];
 			} else {
@@ -157,19 +144,13 @@ class kompetisi extends base {
 		} else { //jika tidak ada ya[ng spesial
 			$data['list'] = $this->m_kompetisi->list_kompetisi($config['per_page'],$uri); //kompetisi yang ditampilkan
 		}
-
 		$this->defaultdisplay('public/jelajah', $data);
-
 	}
-
 	//tampilan untuk search
 	public function search(){
 		$data['title'] = 'Pencarian | ';
 		$data['kategori'] = $this->m_kompetisi->list_kategori(); //menampilkan kategori di top menu
 		$this->load->library('pagination');
-
 		//cek total url segment
-
 	}
-
 }

@@ -1,9 +1,7 @@
 <?php
-
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //memanggil file base untuk melakukan penurunan
 require_once 'application/controllers/base/base.php';
-
 class auth extends base {
 	//membuat construktor
 	public function __construct() {
@@ -12,24 +10,17 @@ class auth extends base {
 		// 	redirect(site_url());
 		// }
 	}
-
 	public function index() {
-	
 		echo '<h1><center>403 : FORBIDEN</center></h1>';
-
 	}
-
 	//OAUTH LOGIN FOR FACEBOOK
 	public function facebook(){
 		require("FBSDK/facebook.php");
-
 		$facebook = new Facebook(array(
 				'appId' => '1419514554927551',
 				'secret' => '2b82a334fe3cdbb86eac5095aa46b6f8'
 			));
-
 		$session = $facebook->getUser();
-
 		if(!empty($session))
 		{
 			// facebook session is active
@@ -37,10 +28,8 @@ class auth extends base {
 			{
 				$uid = $facebook->getUser();
 				$user = $facebook->api('/me');
-
 			}
 			catch(Exception $e){}
-
 			if(!empty($user)) {
 				//print_r($user);
 				//Cek data user apakah sudah daftar				
@@ -69,7 +58,6 @@ class auth extends base {
 									window.location.href='".site_url()."';
 								</SCRIPT>");	
 						// exit();
-							
 					} else {
 						echo 'An Error creating seasson.';
 					}
@@ -95,28 +83,21 @@ class auth extends base {
 			header("Location: " . $login_url);
 		}
 	}
-
 	//OAUTH LOGIN FACEBOOK 2
 	public function facebook_login(){
 	}
-
 	//OAUTH LOGIN FOR GOOGLE
 	public function google(){
-
 	}
-
 	//OAUTH LOGIN FOR TWITTER
 	public function twitter(){
 		echo 'sistem not ready';
 	//END OF OAUTH TWITTER
 	}
-
 	//OAUTH TWITTER 2
 	public function oauth_twitter(){
-
 	}
 	//END OF OAUTH TWITTER 2
-
 	//REGISTER PROCESS
 	//MELENGKAPI DATA
 	public function register(){
@@ -129,7 +110,6 @@ class auth extends base {
 		$this->footerdisplay();
 	}
 	//MELENGKAPI DATA
-
 	//INPUT KE DB DAN AUTO LOGIN
 	public function proc_register(){
 		$this->load->library('form_validation');
@@ -142,7 +122,6 @@ class auth extends base {
 			$username = $this->input->post('reg-username');
 			$email = $this->input->post('reg-email');
 			$moto = $this->input->post('reg-moto');
-
 			$session = $this->session->userdata;
 			$fullname = $session['name'];
 			$sex = $session['gender'];
@@ -153,7 +132,6 @@ class auth extends base {
 			//START QUERY
 			$sql = "INSERT INTO user(oauth_id, oauth_provider,gender,username,email, status, level, tgl_gabung,fullname, moto)
 					VALUES(?,?,?,?,?,'active','user',CURDATE(),?,?)";
-			
 			if($this->db->query($sql, $params)){ //eksekusi query memasukan data ke database
 				//Cek data user apakah sudah daftar
 				$logindata = array($provider, $id);
@@ -170,7 +148,6 @@ class auth extends base {
 							window.alert('Login Success');
 							window.location.href='".site_url()."';
 						</SCRIPT>");
-						
 					} else {
 						echo 'An Error creating seasson.';
 						exit();
@@ -184,12 +161,10 @@ class auth extends base {
 				exit();
 			}
 			//END QUERY
-
 		} else { //jika rules tidak sesuai
 			$data['title'] = "Register";
 			$this->defaultdisplay('user/register', $data);
 			$this->footerdisplay();
 		}
-		
 	}
 }

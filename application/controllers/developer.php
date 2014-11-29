@@ -3,18 +3,14 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //memanggil file base untuk melakukan penurunan
 require_once 'application/controllers/base/base.php';
-
-
 class developer extends base {
 	//membuat construktor
 	public function __construct() {
 		parent::__construct();
 	}
-
 	public function index(){
 		echo '<center><h1>ERROR 403 : Forbidden Access</h1></center>';
 	}
-
 	public function jelajah(){
 		//encode jelajah page to JSON 
 		$limit = $this->input->get('limit'); //OFFSET

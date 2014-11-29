@@ -3,24 +3,19 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //memanggil file base untuk melakukan penurunan
 require_once 'application/controllers/base/base.php';
-
-
 class login extends base {
 	public function index() { //halaman utama super user
 		$data['title'] = "Dashboard | ";
 		//untuk tampilan
 		$this->superdisplay('super/landing', $data);
 	}
-
 	//////////////////////////////////////////////////////////
 	///////////////////////LOGIN PROCESSOR ///////////////////////
-
 	public function login_proc() { //super login
 		$this->load->library('form_validation');
 		//validasi data
 		$this->form_validation->set_rules('username', 'Username',  'required|trim|xss_clean|callback_validate_credentials');
 		$this->form_validation->set_rules('password', 'Password',  'required|md5|trim');
-
 		//jika form_validationnya jalan
 		if($this->form_validation->run() == true) {
 			$username = $this->input->post('username');
@@ -44,9 +39,7 @@ class login extends base {
 			$data['title'] = "Gagal login | ";
 			$this->defaultdisplay('super/landing', $data);
 		}
-		
 	}
-
 	//tempat untuk memberikan pesan kesalahan
 	function validate_credentials(){
 		$username = $this->input->post('username');
@@ -60,5 +53,4 @@ class login extends base {
 			return false;
 		}
 	}
-
 }

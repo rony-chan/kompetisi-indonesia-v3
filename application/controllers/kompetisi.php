@@ -1,22 +1,17 @@
 <?php
-
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //memanggil file base untuk melakukan penurunan
 require_once 'application/controllers/base/base.php';
-
-
 class kompetisi extends base {
 	//membuat construktor
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('user_agent');
 	}
-
 	public function index(){
 		//default page
 		echo "<center><h1>ERROR 404 : Page Not Found</h1></center>";
 	}
-
 	//tambah rate
 	public function tambahrate(){
 		$dec = base64_decode(base64_decode($this->input->get('idkompetisi')));
@@ -53,16 +48,12 @@ class kompetisi extends base {
 			$data = array('id_kompetisi'=>$idkompetisi,'id_user'=>$iduser,'rating'=>$rate);
 			$this->db->insert('rating',$data);
 		}
-
 	}
-
 	public function pages(){ //menampilkan berdasarkan pages yang dimaksud
-
 		$data['title'] = "pages | ";
 		$this->defaultdisplay('public/pages', $data);
 		$this->footerdisplay();
 	}
-
 	//berisi detal kompetisi
 	public function detail($id=''){ //if id not set
 		//decrypt
@@ -81,7 +72,6 @@ class kompetisi extends base {
 			$sql = "UPDATE kompetisi SET views = views + 1 WHERE id_kompetisi = ?";
 			$this->db->query($sql,$id_kompetisi);
 		}
-
 		//rating
 		//cek rating kompetisi di database
 		$query_rating = "SELECT SUM(rating) AS 'rating' FROM rating WHERE id_kompetisi = ?";
@@ -103,7 +93,6 @@ class kompetisi extends base {
 		//konvert ke bilangan bulat
 		$data['recent_rate'] = round($recent_rate);
 		//end of rating
-
 		//jika ada user login
 		if(!empty($this->session->userdata('id_user'))) {
 			$params = array($id_kompetisi, $this->session->userdata('id_user'));
@@ -127,13 +116,10 @@ class kompetisi extends base {
 			$this->defaultdisplay('public/kompetisi', $data);
 			$this->footerdisplay();
 		}
-		
 	}
-
 	//////////////////////////////////////
 	/////// SEMUA TENTANG KOMENTAR ///////
 	//////////////////////////////////////
-
 	public function add_komentar(){ //parameter adalah id kompetisi dan id user
 		if(empty($this->session->userdata('id_user'))){
 			redirect(site_url('kompetisi/detail/'.$_POST['id_kompetisi']));//kembali ke detail kompetisi

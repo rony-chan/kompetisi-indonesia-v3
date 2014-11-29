@@ -1,15 +1,11 @@
-
 <?php
-
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //memanggil file base untuk melakukan penurunan
 require_once 'application/controllers/base/base.php';
-
 class ajax extends base {
 	public function index(){
 		echo '<center><h1>ERROR 404 : Page Not Found</h1></center>';
 	}
-
 	public function rate(){
 		$value = $this->input->get('rate');
 		$sql = $this->m_kompetisi->rating();

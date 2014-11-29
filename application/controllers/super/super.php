@@ -3,11 +3,7 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //memanggil file base untuk melakukan penurunan
 require_once 'application/controllers/base/base.php';
-
-
 class super extends base {
-
-
 	public function __construct() {
 		parent::__construct();
 		//user biasa dilarang masuk
@@ -16,12 +12,9 @@ class super extends base {
 		if(!in_array($loglevel, $level)) {
 			redirect(site_url('super/login')); //masuk form login
 		}
-
 	}
-	
 	//tampilan halaman utama
 	public function dashboard(){
-		
 		//ADMIN OR MODERATOR
 		if($this->session->userdata('level')=='moderator'){
 			$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#kompetisi').addClass('active');});</script>";
@@ -35,11 +28,9 @@ class super extends base {
 		$config['uri_segment'] = 4;
 		$config['num_link'] = 4;		
 		$config['page_query_string'] = TRUE;		
-
 		if(isset($_GET['act'])){ //jika set act
 			$act = $_GET['act'];
 			if($act == 'posted') { //melihat kompetisi yang sudah di post
-
 				$data['title'] = "Kompetisi Aktif | ";
 				//script
 				$data['script'] = "<script type='text/javascript'>$(document).ready(function(){document.getElementById('moderator').className = 'list-group-item';document.getElementById('posted').className = 'active';})</script>";
@@ -69,7 +60,6 @@ class super extends base {
 				//end of pagination set up
 				$data['view'] = $this->m_super->posted($config['per_page'],$uri); //data yang ditampilkan
 				$this->superdisplay('super/dashboard', $data);
-
 			} else if($act == 'draft') { //melihat kompetisi yang masih draft	
 				$data['title'] = "Kompetisi Draft | ";
 				//script
@@ -81,7 +71,6 @@ class super extends base {
 				$config['total_rows'] = $this->m_super->count_draft(); //total rows untuk kompetisi yang dipost
 				$uri = $this->uri->segment(4);
 				$this->pagination->initialize($config); 		
-				
 				if(isset($_GET['per_page'])) {
 					if($_GET['per_page'] == '') { 
 						$uri = 0;
@@ -91,7 +80,6 @@ class super extends base {
 				} else {
 					$uri = 0;
 				}
-
 				if($config['total_rows'] < 20) {
 					$data['page'] = 1;
 				} else {
@@ -102,12 +90,10 @@ class super extends base {
 				$data['view'] = $this->m_super->draft($config['per_page'],$uri);
 				$this->superdisplay('super/dashboard', $data);
 			}		
-
 		} else { //jika tidak set act			
 			echo "<center><h1>GET OUT HACKER</h1></center>";
 		}
 	}
-
 	//tampilan kategori kompetisi
 	public function kategori(){
 		$data['title'] = 'Main Kategori';
@@ -121,7 +107,6 @@ class super extends base {
 		$data['kategori'] = $querykategori->result_array();//
 		$this->superdisplay('super/main_kategori',$data);
 	}
-
 	//tampilan halaman request kompetisi
 	public function request(){
 		//ADMIN OR MODERATOR
@@ -148,7 +133,6 @@ class super extends base {
 				$config['total_rows'] = $this->m_request->count_waiting(); //total rows untuk kompetisi yang dipost
 				$uri = $this->uri->segment(4);
 				$this->pagination->initialize($config); 
-
 				if(isset($_GET['per_page'])) {
 					if($_GET['per_page'] == '') { 
 						$uri = 0;
@@ -158,7 +142,6 @@ class super extends base {
 				} else {
 					$uri = 0;
 				}
-
 				if($config['total_rows'] < 20) {
 					$data['page'] = 1;
 				} else {
@@ -176,7 +159,6 @@ class super extends base {
 				$config['total_rows'] = $this->m_request->count_posted(); //total rows untuk kompetisi yang dipost
 				$uri = $this->uri->segment(4);
 				$this->pagination->initialize($config); 		
-				
 				if(isset($_GET['per_page'])) {
 					if($_GET['per_page'] == '') { 
 						$uri = 0;
@@ -186,7 +168,6 @@ class super extends base {
 				} else {
 					$uri = 0;
 				}
-
 				if($config['total_rows'] < 20) {
 					$data['page'] = 1;
 				} else {
@@ -204,7 +185,6 @@ class super extends base {
 				$config['total_rows'] = $this->m_request->count_reject(); //total rows untuk kompetisi yang dipost
 				$uri = $this->uri->segment(4);
 				$this->pagination->initialize($config); 		
-				
 				if(isset($_GET['per_page'])) {
 					if($_GET['per_page'] == '') { 
 						$uri = 0;
@@ -214,7 +194,6 @@ class super extends base {
 				} else {
 					$uri = 0;
 				}
-
 				if($config['total_rows'] < 20) {
 					$data['page'] = 1;
 				} else {
@@ -229,11 +208,7 @@ class super extends base {
 		} else { //jika tidak set act			
 			echo "<center><h1>GET OUT HACKER</h1></center>";
 		}
-		
-		
-		
 	}
-
 	//tampilan request poster / link
 	public function request2(){
 		//ADMIN OR MODERATOR
@@ -248,7 +223,6 @@ class super extends base {
 		$config['uri_segment'] = 4;
 		$config['num_link'] = 4;		
 		$config['page_query_string'] = TRUE;
-
 		//if set action
 		if(isset($_GET['act'])) {
 			$act = $_GET['act'];
@@ -278,7 +252,6 @@ class super extends base {
 				//end of pagination set up
 				$data['view'] = $this->m_request->show_req_waiting($config['per_page'],$uri); //menampilkan request yang ditunggu
 				$this->superdisplay('super/request2', $data);
-
 			} else if($act == 'ditolak') {
 				$data['title'] = "Request Ditolak | ";
 				$data['tot'] = $this->m_request->count_sort_reject(); //total request yang menunggu				
@@ -337,9 +310,7 @@ class super extends base {
 		} else { //jika tidak set act
 			echo "<center><h1>GET OUT HACKER</h1></center>";
 		}
-
 	}
-
 	//tampilan halaman user
 	public function moderator(){
 		$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#moderator').addClass('active'); });</script>";
@@ -361,7 +332,6 @@ class super extends base {
 				$config['total_rows'] = $this->m_moderator->count_active_user(); //total rows untuk kompetisi yang dipost
 				$uri = $this->uri->segment(4);
 				$this->pagination->initialize($config); 		
-				
 				if(isset($_GET['per_page'])) {
 					if($_GET['per_page'] == '') { 
 						$uri = 0;
@@ -371,7 +341,6 @@ class super extends base {
 				} else {
 					$uri = 0;
 				}
-
 				if($config['total_rows'] < 20) {
 					$data['page'] = 1;
 				} else {
@@ -380,7 +349,6 @@ class super extends base {
 				//end of pagination set up
 				$data['view'] = $this->m_moderator->show_active_user($config['per_page'],$uri); //menampilkan user yang active
 				$this->superdisplay('super/moderator', $data);
-
 			} else if ($act == 'banned') {
 				$data['title'] = "Moderator diBanned | ";
 				$data['tot'] = $this->m_moderator->count_banned_user(); //total user active
@@ -389,7 +357,6 @@ class super extends base {
 				$config['total_rows'] = $this->m_moderator->count_banned_user(); //total rows untuk kompetisi yang dipost
 				$uri = $this->uri->segment(4);
 				$this->pagination->initialize($config); 		
-				
 				if(isset($_GET['per_page'])) {
 					if($_GET['per_page'] == '') { 
 						$uri = 0;
@@ -399,7 +366,6 @@ class super extends base {
 				} else {
 					$uri = 0;
 				}
-
 				if($config['total_rows'] < 20) {
 					$data['page'] = 1;
 				} else {
@@ -415,7 +381,6 @@ class super extends base {
 			echo "<center><h1>GET OUT HACKER</h1></center>";
 		}
 	}
-
 	//menambah moderator baru
 	public function proc_addModerator(){
 		$data['title'] = 'Loading ...';
@@ -454,8 +419,6 @@ class super extends base {
 			</SCRIPT>");
 		}
 	}
-
-
 	//tampilan halaman user
 	public function user(){
 		$data['script2'] = "<script type='text/javascript'>$(document).ready(function(){ $('#user').addClass('active'); });</script>";
@@ -477,7 +440,6 @@ class super extends base {
 				$config['total_rows'] = $this->m_user->count_active_user(); //total rows untuk kompetisi yang dipost
 				$uri = $this->uri->segment(4);
 				$this->pagination->initialize($config); 		
-				
 				if(isset($_GET['per_page'])) {
 					if($_GET['per_page'] == '') { 
 						$uri = 0;
@@ -487,7 +449,6 @@ class super extends base {
 				} else {
 					$uri = 0;
 				}
-
 				if($config['total_rows'] < 20) {
 					$data['page'] = 1;
 				} else {
@@ -496,7 +457,6 @@ class super extends base {
 				//end of pagination set up
 				$data['view'] = $this->m_user->show_active_user($config['per_page'],$uri); //menampilkan user yang active
 				$this->superdisplay('super/user', $data);
-
 			} else if ($act == 'banned') {
 				$data['title'] = "User Active | ";
 				$data['tot'] = $this->m_user->count_banned_user(); //total user active
@@ -505,7 +465,6 @@ class super extends base {
 				$config['total_rows'] = $this->m_user->count_banned_user(); //total rows untuk kompetisi yang dipost
 				$uri = $this->uri->segment(4);
 				$this->pagination->initialize($config); 		
-				
 				if(isset($_GET['per_page'])) {
 					if($_GET['per_page'] == '') { 
 						$uri = 0;
@@ -515,7 +474,6 @@ class super extends base {
 				} else {
 					$uri = 0;
 				}
-
 				if($config['total_rows'] < 20) {
 					$data['page'] = 1;
 				} else {
@@ -531,7 +489,6 @@ class super extends base {
 			echo "<center><h1>GET OUT HACKER</h1></center>";
 		}
 	}
-
 	//tampilan halaman post
 	public function post(){
 		//ADMIN OR MODERATOR
@@ -548,7 +505,6 @@ class super extends base {
 		$config['page_query_string'] = TRUE;
 		$config['base_url'] = site_url().'/super/super/post?act='.$this->input->get('act', TRUE);
 		//set action
-
 		if(isset($_GET['act'])) {
 			$act = $_GET['act'];
 			if($act=='active' ) {
@@ -559,7 +515,6 @@ class super extends base {
 				$config['total_rows'] = $this->m_post->count_post();
 				$uri = $this->uri->segment(4);
 				$this->pagination->initialize($config); 		
-				
 				if(isset($_GET['per_page'])) {
 					if($_GET['per_page'] == '') { 
 						$uri = 0;
@@ -569,7 +524,6 @@ class super extends base {
 				} else {
 					$uri = 0;
 				}
-
 				if($config['total_rows'] < 20) {
 					$data['page'] = 1;
 				} else {
@@ -586,7 +540,6 @@ class super extends base {
 				$config['total_rows'] = $this->m_post->count_draft();
 				$uri = $this->uri->segment(4);
 				$this->pagination->initialize($config); 		
-				
 				if(isset($_GET['per_page'])) {
 					if($_GET['per_page'] == '') { 
 						$uri = 0;
@@ -596,7 +549,6 @@ class super extends base {
 				} else {
 					$uri = 0;
 				}
-				
 				if($config['total_rows'] < 20) {
 					$data['page'] = 1;
 				} else {
@@ -608,12 +560,10 @@ class super extends base {
 			} else {
 				echo "<center><h1>GET OUT HACKER</h1></center>";
 			}
-
 		} else {
 			echo "<center><h1>GET OUT HACKER</h1></center>";
 		}
 	}
-
 	///////////////
 	// ads
 	public function ads(){
@@ -640,7 +590,6 @@ class super extends base {
 		} else {
 			$uri = 0;
 		}
-
 		if($config['total_rows'] < 20) {
 			$data['page'] = 1;
 		} else {
@@ -650,7 +599,6 @@ class super extends base {
 		$data['view'] = $this->m_ads->showAllAds($config['per_page'],$uri);
 		$this->superdisplay('super/ads', $data);
 	}
-
 	//tampilan edit post
 	public function edit(){
 		if (isset($_GET['id'])){
@@ -668,16 +616,13 @@ class super extends base {
 			redirect(site_url('super/super/dashboard'));
 		}
 	}
-
 	//////////////////////////////////////////////////////////
 	/////////////////////// PROCESSOR ///////////////////////
-
 	public function login() { //super login
 		$this->load->library('form_validation');
 		//validasi data
 		$this->form_validation->set_rules('username', 'Username',  'required|trim|xss_clean|callback_validate_credentials');
 		$this->form_validation->set_rules('password', 'Password',  'required|md5|trim');
-
 		//jika form_validationnya jalan
 		if($this->form_validation->run() == true) {
 			$username = $this->input->post('username');
@@ -687,7 +632,6 @@ class super extends base {
 			if(!empty($admindata)) {
 				//mengisi array session;
 				$sessionData['is_logged_in'] = 1;
-				
 				$this->session->set_userdata($admindata);				
 				redirect('super/super/dashboard?act=posted'); //login berhasil redirect ke super dashboard				
 			} else {
@@ -699,9 +643,7 @@ class super extends base {
 			$data['title'] = "Gagal login | ";
 			$this->defaultdisplay('super/landing', $data);
 		}
-		
 	}
-
 	//tempat untuk memberikan pesan kesalahan
 	function validate_credentials(){
 		$username = $this->input->post('username');
@@ -715,7 +657,6 @@ class super extends base {
 			return false;
 		}
 	}
-
 	////////////////////KOMPETISI///////////////////
 	//fungsi untuk menambah kompetisi
 	function add_kompetisi(){
@@ -733,7 +674,6 @@ class super extends base {
 			$hadiah = $this->input->post('hadiah');//detail hadiah
 			$link = $this->input->post('link');//link sumber kompetisi
 			$gambar = $_FILES['poster'];//poster
-			
 			//jika upload poster
 			if(isset($_FILES['poster'])) {
 				$gambar_nama = str_replace(' ', '_', $gambar['name']); //rename ' ' menjadi '-'
@@ -749,9 +689,7 @@ class super extends base {
 			} else {
 				$gambar_nama = '';
 			}
-
 			$params = array($judul, $sort, $gambar_nama, $penyelenggara,$konten, $author, $main_kat, $sub_kat, $deadline, $pengumuman,	$total, $hadiah, $link,$konten); //untuk diinput kedatabase
-			
 			if($this->m_super->add_kompetisi($params)) { //jika insert data ke database
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('Pasang Kompetisi Berhasil');
@@ -764,7 +702,6 @@ class super extends base {
 				</SCRIPT>");
 				//redirect(site_url('dashboard')); //jika tidak menekan brn_pasang maka akan diredirect ke dashboard
 			}
-
 		} else {
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
 				window.alert('terjadi kesalahan, silahkan coba lagi');
@@ -773,7 +710,6 @@ class super extends base {
 			//redirect(site_url('dashboard')); //jika tidak menekan brn_pasang maka akan diredirect ke dashboard
 		}
 	}
-
 	public function edit_kompetisi(){ //edit postingan yang dibuat oleh user
 		if(isset($_POST)) {
 			$author = $this->session->userdata('id_user');//id user
@@ -792,8 +728,6 @@ class super extends base {
 			$img = $this->input->post('poster_lama');//jika tidak upload poster
 			$id_kompetisi = $this->input->post('id_kompetisi'); //id kompetisi
 			//jika upload poster
-			
-
 			$this->load->library('upload');
 				//config untuk library upload
 			$config['upload_path'] = './images/poster';
@@ -806,23 +740,19 @@ class super extends base {
 			} else {
 				$gambar_nama = $img; //post
 			}	
-						
 			echo $this->upload->display_errors();	
 			if(isset($_POST['btn_post'])) {
 				$status = 'posted';
 			} else if(isset($_POST['btn_draft'])) {
 				$status = 'draft';
 			}
-
 			$params = array($judul, $sort, $gambar_nama, $penyelenggara,$konten,$main_kat, $sub_kat, $deadline, $pengumuman,	$total, $hadiah, $link, $status,$id_kompetisi, $status); //untuk diinput kedatabase
-			
 			if($this->m_kompetisi->edit($params)) { //jika insert data ke database
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('Update Berhasil');
 					window.location.href='dashboard?act=posted';
 				</SCRIPT>");
 			} else {
-
 				echo ("<SCRIPT LANGUAGE='JavaScript'>
 					window.alert('terjadi kesalahan, silahkan coba lagi');
 					window.location.href='dashboard?act=posted';
@@ -836,7 +766,6 @@ class super extends base {
 			//redirect(site_url('dashboard')); //jika tidak menekan brn_pasang maka akan diredirect ke dashboard
 		}	
 	}
-
 	//delete kompetisi
 	function delete_kompetisi(){
 		$id = $_GET['id'];
@@ -854,14 +783,11 @@ class super extends base {
 				");
 		}
 	}
-
-
 	////////////////////POST////////////////////////
 	//fungsi untuk menambahkan post
 	function add_post() {
 		$title = $this->input->post('title'); //judul postingan
 		$content = $this->input->post('content'); //isi postingan
-		
 		//struktur kendali apakah postingan di post
 		if(isset($_POST['btn_post'])) {
 			//jika menekan tombol post
@@ -894,16 +820,13 @@ class super extends base {
 				</SCRIPT>");
 			}
 		}
-		
 	}
-
 	//fungsi untuk edit post
 	function edit_post(){
 		$id = $_GET['id']; //id kompetisi
 		$data['post'] = $this->m_post->show_post($id); //menampilkan detail post
 		$this->defaultdisplay('super/edit_post', $data); //tampilan edit post
 	}
-
 	function btn_edit_post(){
 		//fungsi untuk update post, mengambil data
 		$id = $this->input->post('id');
@@ -939,7 +862,6 @@ class super extends base {
 			}
 		}
 	}
-
 	//fungsi untuk delete post
 	function delete_post() {
 		$id= $_GET['id'];
@@ -955,7 +877,6 @@ class super extends base {
 			</SCRIPT>");
 		}
 	}
-
 	////////////////////KOMPETISI////////////////////////
 	//btn menerima request kompetisi
 	function btn_accept_kompetisi(){
@@ -972,8 +893,6 @@ class super extends base {
 			</SCRIPT>");
 		}
 	}
-
-
 	//btn menolak request kompetisi
 	function btn_reject_kompetisi(){
 		$id = $_GET['id'];
@@ -989,7 +908,6 @@ class super extends base {
 			</SCRIPT>");
 		}
 	}
-
 	//button untuk merubah user active dan di banned
 	function btn_user(){
 		$id = $_GET['id'];
@@ -1020,7 +938,6 @@ class super extends base {
 			}
 		}
 	}
-
 	////////////////////////btn 2/////////////////////////////////////
 	function btn_proc2(){
 		$id = $_GET['id'];
@@ -1042,8 +959,6 @@ class super extends base {
 					window.location.href='".site_url('super/super/request2?act=menunggu')."';
 				</SCRIPT>");
 	}
-
-
 	//logout
 	function logout() {
 		//fungsi yang digunakan untuk menghapus session
@@ -1051,6 +966,4 @@ class super extends base {
 		//output
 		redirect(site_url('super/login'));
 	}
-
-
 }
