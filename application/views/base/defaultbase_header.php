@@ -186,7 +186,7 @@
 								<span class="col-md-6">
 									<p>login via :</p>
 									<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="http://kompetisiindonesia.com/images/icon/fb-20x20.png" alt="facebook login"/></span>Facebook</a>
-									<!-- <a class="btn-connect twitter"  href="<?php echo site_url('auth/twitter')?>"><span style="float:left"><img src="http://kompetisiindonesia.com/images/icon/twitter-20x20.png" alt="twitter login"/></span>Twitter</a> -->
+									<a class="btn-connect g"  href=""><span style="float:left"></span>Telkom ID</a>
 								</span>
 
 							</center>
