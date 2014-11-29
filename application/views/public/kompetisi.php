@@ -11,7 +11,6 @@ $id = $id_kompetisi = str_replace('=', '', $enc);
 		$('#star').raty({score: n});
 		$('#starnologin').raty({readOnly:true, score: n});
 	});	
-
 //for rating
 function giveRate(x){
 	var score = x;
@@ -30,11 +29,8 @@ function giveRate(x){
 		});
 	});
 }
-
 </script>
-
 <div class="container">
-
 	<div class="col-md-offset-1 col-md-10">
 		<!--breadcrumb-->
 		<br/>
@@ -50,13 +46,9 @@ function giveRate(x){
 			</ol>
 		</div>
 	</div>
-
 	<div style="background-color: #FFF" class="col-md-offset-1 col-md-10">
-
-
 		<div  class="row content-head" style="background-color:rgb(236, 236, 236);padding: 10px 0 10px 0;">
 			<div class="col-md-4">
-
 				<?php 
 			if(empty($view['poster'])){ //jika tidak upload poster
 				echo '<center style="padding:10px">POSTER TIDAK TERSEDIA</center>';
@@ -70,7 +62,6 @@ function giveRate(x){
 							<br/>
 							<p style="color:#fff">Tekan ESC untuk menutup <button type="button" class="btn btn-xs btn-default" data-dismiss="modal" aria-hidden="true">&times;</button></p>
 							<img alt="<?php echo $view['judul_kompetisi']?>" style="margin-bottom:30px" src="<?php echo base_url('images/poster/'.$view['poster'].'')?>"/>
-
 						</div><!-- /.modal-dialog -->
 					</center>
 				</div><!-- /.modal -->
@@ -85,7 +76,6 @@ function giveRate(x){
 				<h1 style="font-size: 25px;" class="title"><?php echo $view['judul_kompetisi']?></h1>
 				<p class="about-post"><span class="glyphicon glyphicon-user"></span> <a style="color:#fff; text-decoration:none" title="Kompetisi Author" href="<?php echo site_url('publik/profile/'.$view['author']) ?>"><?php echo $view['author']?></a> | <span class="glyphicon glyphicon-calendar"></span> post:<?php echo date('d-m-Y', strtotime($view['tgl_buat']))?> | <span class="glyphicon glyphicon-calendar"></span> update:<?php echo date('d-m-Y', strtotime($view['tgl_edit']))?> | <span class="glyphicon glyphicon-eye-open"></span> <?php echo $view['views']?> </p>
 			</div>
-
 			<div class="col-md-6">
 				<?php
 					//jika user belum login maka tidak bisa memberikan rating
@@ -95,7 +85,6 @@ function giveRate(x){
 					<?php } else { ?>
 					<div id="starnologin"></div>
 					<?php } ?>
-
 					<h2 style="font-size:13px"><?php echo $view['sort']?></h2>
 					<hr/>
 					<strong>Deadline :</strong> <?php echo date('d-m-Y', strtotime($view['deadline']))?><br/>
@@ -115,7 +104,6 @@ function giveRate(x){
 					} else {
 						$total =  $view['total_hadiah'];
 					}
-
 					?>
 					<strong>Hadiah Senilai :</strong> <?php echo $total?><br/>
 					<strong>Detail Hadiah :</strong> <?php echo $view['hadiah']?>
@@ -190,7 +178,6 @@ function giveRate(x){
 					<li class="active"><a href="#komentarnya">Komentar</a></li>
 					<li><a href="#facebook">Facebook</a></li>
 				</ul>
-
 				<div class="tab-content">
 					<div class="tab-pane active" id="komentarnya">
 						<h4>Total <?php echo $count_komentar;?> Komentar</h4>
@@ -210,11 +197,9 @@ function giveRate(x){
 											case 'facebook':
 											$pp = 'https://graph.facebook.com/'.$komen['oauth_id'].'/picture?width=9999';
 											break;
-
 											case 'telkomid':
 												# code...
 											break;
-											
 											default:
 												$pp = base_url('images/avatar3.png');//default profile picture
 												break;
@@ -248,11 +233,9 @@ function giveRate(x){
 												case 'facebook'://facebook
 												$ppsaya = 'https://graph.facebook.com/'.$this->session->userdata('oauth_id').'/picture?width=9999';
 												break;
-
 												case 'telkomid'://telkom id
 												# code...
 												break;
-												
 												default:
 												$ppsaya = base_url('images/avatar3.png');//default profile picture
 												break;
@@ -264,7 +247,6 @@ function giveRate(x){
 									<img style="width:100%" src="<?php echo $ppsaya;?>" style="width:100%" />
 								</div>
 								<div class="col-md-10">
-
 									<!-- form balas komentar -->
 									<form action="<?php echo site_url('kompetisi/add_komentar');?>" method="POST" class="form">
 										<textarea name="input_komentar" style="width:100%" class="form-control" placeholder="ada pertanyaan masukan disini"></textarea>
@@ -289,14 +271,10 @@ function giveRate(x){
 					<li class="previous"><a href="#">&larr; Sebelumnya</a></li>
 					<li style="font-size:13px" class="next"><a href="#">Berikutnya &rarr;</a></li>
 				</ul>
-
 			</div>
-
-
 			<div id="sidebar">
 				<?php $this->load->view('public/sidebar.php'); ?>	
 			</div>
-
 		</div>
 	</div>
 </div>

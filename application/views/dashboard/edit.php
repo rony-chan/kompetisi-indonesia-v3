@@ -3,13 +3,8 @@
 		var kat = <?php echo $view['id_sub_kat']?>;
     	$('#sub').val(kat);
 	});
-
 	//SET DEFAULT POSTER FILE
-
-	
 </script>
-
-
 <br/>
 </h3>
 <div class="container">
@@ -18,7 +13,6 @@
 		<div class="col-md-2">
 			<?php $this->load->view('dashboard/menu');?>
 		</div>
-
 		<div style="background-color:#fff" class="col-md-7">
 			<h3>Pasang Kompetisi</h3>
 			<p>tanda *, adalah form yang wajib diisi</p>
@@ -37,7 +31,6 @@
 						<input name="sort" type="text" class="form-control" id="deskripsisingkat" value="<?php echo $view['sort']?>" required>
 					</div>
 				</div>
-
 				<!--auto load when user select main kategori-->
 				<div class="form-group">
 					<label for="subkategori" class="col-lg-2 control-label">*Sub Kategori</label>
@@ -49,8 +42,6 @@
 						</select>
 					</div>
 				</div>
-
-
 				<div class="form-group">
 					<label for="deadline" class="col-lg-2 control-label">*Deadline</label>
 					<div class="col-lg-10">
@@ -127,11 +118,9 @@
 				<input type="hidden" name="id_kompetisi" value="<?php echo $view['id_kompetisi']?>">
 			</form>
 		</div>
-
 		<div class="col-md-3">
 			<p></p>
 			<p><strong>Contoh Pasang Kompetisi yang benar</strong></p>
-
 		</div>
 	</div>
 </div>

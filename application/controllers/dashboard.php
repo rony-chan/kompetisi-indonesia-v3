@@ -4,7 +4,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 //memanggil file base untuk melakukan penurunan
 require_once 'application/controllers/base/base.php';
 class dashboard extends base {
-
 	public function __construct() {
 		parent::__construct();
 		//jika tidak login
@@ -12,9 +11,7 @@ class dashboard extends base {
 			redirect(site_url());
 		}
 	}
-
 	public function index() {
-		
 		$data['script'] = '<script>$(document).ready(function(){$(\'#ikut\').addClass(\'active white-text\');});</script>';
 		$id = $this->session->userdata('id_user'); //mengambil data id user
 		$data['title'] = 'Kompetisi diikuti | ';
@@ -27,7 +24,6 @@ class dashboard extends base {
 		$config['base_url'] = site_url().'/dashboard?ki='.$this->input->get('ki',TRUE);
 		$config['total_rows'] = $this->m_kompetisi->count_diikuti_kompetisi($id); 
 		$this->pagination->initialize($config); 
-
 		if(isset($_GET['per_page'])) {
 			if($_GET['per_page'] == '') { 
 				$uri = 0;
@@ -37,7 +33,6 @@ class dashboard extends base {
 		} else {
 			$uri = 0;
 		}
-
 		if($config['total_rows'] < 20) {
 			$data['page'] = 1;
 		} else {
@@ -53,7 +48,6 @@ class dashboard extends base {
 		$this->defaultdisplay('dashboard/home', $data);
 		$this->footerdisplay();
 	}
-
 	public function ditandai(){
 		$data['script'] = '<script>$(document).ready(function(){$(\'#tandai\').addClass(\'active white-text\');});</script>';
 		$id = $this->session->userdata('id_user'); //mengambil data id user
@@ -66,9 +60,7 @@ class dashboard extends base {
 		$config['page_query_string'] = TRUE;
 		$config['base_url'] = site_url().'/dashboard/ditandai?ki='.$this->input->get('ki',TRUE);
 		$config['total_rows'] = $this->m_kompetisi->count_tandai_kompetisi($id); 
-		
 		$this->pagination->initialize($config); 
-
 		if(isset($_GET['per_page'])) {
 			if($_GET['per_page'] == '') { 
 				$uri = 0;
@@ -78,7 +70,6 @@ class dashboard extends base {
 		} else {
 			$uri = 0;
 		}
-
 		if($config['total_rows'] < 20) {
 			$data['page'] = 1;
 		} else {
@@ -94,7 +85,6 @@ class dashboard extends base {
 		$this->defaultdisplay('dashboard/ditandai', $data);
 		$this->footerdisplay();
 	}
-
 	public function saya(){
 		$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');});</script>';
 		$id = $this->session->userdata('id_user'); //mengambil data id user
@@ -107,9 +97,7 @@ class dashboard extends base {
 		$config['page_query_string'] = TRUE;
 		$config['base_url'] = site_url().'/dashboard/saya?ki='.$this->input->get('ki',TRUE);
 		$config['total_rows'] = $this->m_kompetisi->count_kompetisiku($id); 
-		
 		$this->pagination->initialize($config); 
-
 		if(isset($_GET['per_page'])) {
 			if($_GET['per_page'] == '') { 
 				$uri = 0;
@@ -119,7 +107,6 @@ class dashboard extends base {
 		} else {
 			$uri = 0;
 		}
-
 		if($config['total_rows'] < 20) {
 			$data['page'] = 1;
 		} else {
@@ -134,7 +121,6 @@ class dashboard extends base {
 		$this->defaultdisplay('dashboard/saya', $data);
 		$this->footerdisplay();
 	}
-
 	public function pasang(){
 		$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');});</script>';
 		//jika by tidak sama dengan username, maka dicancel
@@ -154,7 +140,6 @@ class dashboard extends base {
 			redirect(site_url('super/super/dashboard')); //kembali ke dashboard
 		}
 	}
-
 	public function edit(){
 		//id kompetisi
 		$data['script'] = '<script>$(document).ready(function(){$(\'#saya\').addClass(\'active white-text\');});</script>';
@@ -172,7 +157,6 @@ class dashboard extends base {
 		$this->defaultdisplay('dashboard/edit_kompetisi', $data);
 		$this->footerdisplay();	
 	}
-
 	public function profile(){ //halaman untuk edit data user
 		$data['script'] = '<script>$(document).ready(function(){$(\'#edit\').addClass(\'active white-text\');});</script>';
 		$data['title'] = "Edit Profile | ";
@@ -184,9 +168,7 @@ class dashboard extends base {
 		$data['view'] = $this->m_user->show_user($id);
 		$this->defaultdisplay('dashboard/profile', $data);
 		$this->footerdisplay();
-
 	}
-
 	//manage competition
 	//user - winners
 	public function manage(){
@@ -279,7 +261,6 @@ class dashboard extends base {
 		} else {
 			echo 'Gagal verifikasi :: user bukan peserta / kompetisi tidak tersedia';
 		}
-
 	}
 	//memproses pemenang
 	public function proc_winner(){
@@ -307,7 +288,6 @@ class dashboard extends base {
 						redirect(site_url('dashboard/manage?id='.$_POST['id'].'&act=winner'));
 					}
 					break;	
-
 				case 'delete':
 					//data
 					$username = $_GET['username'];

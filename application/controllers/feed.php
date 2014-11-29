@@ -1,14 +1,11 @@
 <?php 
-
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 class feed extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->helper(array('xml','text'));
 		$this->load->model('m_rss');
 	}
-
 	function index(){ //rss maker
 		//set data what we set
 		$data['encoding'] = 'utf-8';

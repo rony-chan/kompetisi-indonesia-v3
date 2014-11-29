@@ -11,7 +11,6 @@
 	<?php } else { ?>
 	<meta name="description" content="Kumpulan kompetisi yang diadakan di Indonesia"/>
 	<?php } ?>	
-
 	<!--google web master-->
 	<meta name="google-site-verification" content="8XcVX_SJldhaagGKaVFgLgMUaVpOpRE1V0Has2ERsF4" />
 	<!-- google for business -->
@@ -37,7 +36,6 @@
 <?php } else { ?>
 <meta property="og:title" content="Kompetisi Indonesia"/>
 <?php } ?>
-
 <?php if(isset($view['sort'])) { ?>
 <meta property="og:description" content="<?php echo $view['sort']?>"/>
 <?php } else { ?>
@@ -70,17 +68,12 @@
 			$(this).tab('show')
 		})
 	});
-	
 </script>
 <script type"text/javascript" src="<?php echo base_url('dist/tinymce/js/tinymce/tinymce.min.js')?>"></script>
 </head>
-
-
 <body style="background-color:rgb(236, 236, 236)">
-
 	<div id="base-heading" class="base-heading" class="row">
 		<div class="container">
-
 			<nav>
 			</nav>
 			<header>
@@ -108,27 +101,22 @@
 									<div class="dropdown pull-right">
 										<a data-toggle="dropdown" href="#">
 											<?php if (empty($this->session->userdata('oauth_id'))): ?>
-
 												<img style="margin-right:5px;width:40px;height:40px" src="<?php echo base_url('images/avatar3.png'); ?>" alt="kompetisi indonesia user"/>
-
 											<?php else: ?>
 												<?php
 												switch ($this->session->userdata('oauth_provider')) {
 												case 'facebook'://facebook
 												$ppsaya = 'https://graph.facebook.com/'.$this->session->userdata('oauth_id').'/picture?width=9999';
 												break;
-
 												case 'telkomid'://telkom id
 												# code...
 												break;
-												
 												default:
 												$ppsaya = base_url('images/avatar3.png');//default profile picture
 												break;
 											}
 											?>
 											<img style="margin-right:5px;width:40px;height:40px" src="<?php echo $ppsaya;?>" alt="kompetisi indonesia user"/>
-											
 										<?php endif; ?>
 										<?php echo $this->session->userdata('username'); ?><span class="caret"></span></a>
 										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -152,8 +140,6 @@
 			</header>
 		</div>			
 		<!--base end-->    
-
-
 	</div>
 	<div class="base-heading-space" class="row"></div>
 	<!--JS-->
@@ -171,7 +157,6 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-
 	<!--modal login-->
 	<div class=" modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -187,7 +172,6 @@
 								<span class="col-md-6">
 									<h3 style="width:50%"> <span class="glyphicon glyphicon-user"> </span><br/> Pasang dan Manajemen Kompetisi</h3><br/><br/>
 								</span>
-
 								<span class="col-md-6">
 									<form method="post" action="<?php echo site_url('publik/login')?>" role="form">
 										<div class="form-group">
@@ -206,24 +190,20 @@
 										<input  type="submit" class="btn btn-default" value="Log in"/>
 									</form>
 								</span>
-
 								<span class="col-md-6">
 									<p>login via :</p>
 									<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="http://kompetisiindonesia.com/images/icon/fb-20x20.png" alt="facebook login"/></span>Facebook</a>
 									<a class="btn-connect g"  href=""><span style="float:left"></span>Telkom ID</a>
 								</span>
-
 								<!-- <span class="col-md-6">
 											<p>login via :</p>
 											<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/fb-20x20.png'); ?>" alt="facebook login"/></span>Facebook</a>
 											<a class="btn-connect twitter"  href="<?php echo site_url('auth/twitter')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/twitter-20x20.png'); ?>" alt="twitter login"/></span>Twitter</a>
 											<a class="btn-connect g"  href="<?php echo site_url('auth/twitter')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/g-20x20.png'); ?>" alt="google+ login"/></span>Google+</a>
 										</span> -->
-
 									</center>
 								</span>
 							</span>
-
 							<hr/>
 						</div>
 					</div><!-- /.modal-content -->

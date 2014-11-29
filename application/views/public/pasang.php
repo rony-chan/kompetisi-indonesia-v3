@@ -31,7 +31,7 @@
 		$("#arrow2").hide();
 	}
 </script>
-
+<div class="container">
 <div style="background-color:#fff" class="row">
 	<div class="col-md-12">
 		<center>
@@ -86,8 +86,6 @@
 <div style="background-color:#fff;padding:5px" class="row"></div>
 </div>	
 
-
-<body>
 
 	<section  class="line1" id="line1">
 		<div class="container">
@@ -174,7 +172,7 @@
 				<center><h2>Isi Form</h2><p>Kompetisi akan lebih cepat di posting, pastikan data yang anda masukan selengkap mungkin </p>
 					<br/>
 					<?php if(empty($this->session->userdata('username'))) { ?>
-						<h6>silahkan login terlebih dahulu, <a href="#modal" data-toggle="modal">belum punya akun?</a></h6>
+						<h6>silahkan login terlebih dahulu, <a href="#login" data-toggle="modal">belum punya akun?</a></h6>
 						<a class="btn btn-default" href="#login" data-toggle="modal">Login</a>
 						<br/><br/>
 					<?php } else { ?>
@@ -187,3 +185,4 @@
 		</div>
 	</div>
 </section>
+</div>
