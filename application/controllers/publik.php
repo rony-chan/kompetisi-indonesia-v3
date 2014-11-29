@@ -113,23 +113,26 @@ class publik extends base {
 		$data['ikut'] = $this->m_kompetisi->count_diikuti_kompetisi($id);
 		//add competition
 		$data['pasang'] = $this->m_kompetisi->count_kompetisiku($id);
-		//show won competition
+		//winner competition
+		$data['menang'] = $this->m_kompetisi->total_dimenangkan($id);
+		//show total hadiah yang dimenangkan
+		$data['hadiah'] = $this->m_kompetisi->total_hadiah($id);
 		//action
 		if(isset($_GET['act'])) {
 			$act = $_GET['act'];
 			switch ($act) {
 			case 'ikut':
-				$data['view'] = $this->m_kompetisi->show_kompetisi_gabung($id,10,0);
+				$data['view'] = $this->m_kompetisi->show_kompetisi_gabung($id,20,0);
 				$data['dec'] = 'Kompetisi Yang Diikuti '.$username.' di KompetisiIndonesia';
 				break;
 
 			case 'pasang':
-				$data['view'] = $this->m_kompetisi->show_kompetisi_dipasang($id,10,0);
+				$data['view'] = $this->m_kompetisi->show_kompetisi_dipasang($id,20,0);
 				$data['dec'] = 'Kompetisi Yang Dipasang '.$username.' di KompetisiIndonesia';
 				break;
 
 			case 'menang':
-				$data['view'] = array();
+				$data['view'] = $this->m_kompetisi->show_kompetisi_menang($id,20,0);
 				$data['dec']= 'Kompetisi Yang Dimenangkan '.$username.' di KompetisiIndonesia';
 				break;
 			

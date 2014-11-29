@@ -28,30 +28,10 @@
 <div class="container">
 		<center><h3 style="text-transform:uppercase" class="kompetisi-detail"><?php echo $this->session->userdata('username')?> dasbor</h3></center>
 		<div class="col-md-2">
-			<a style="margin-bottom:5px;width:100%" href="<?php echo site_url('dashboard/pasang?by=').$this->session->userdata('username')?>" class="btn btn-default">+ Pasang Kompetisi</span></a>
-			<ul class="list-group">			  
-				<li class="list-group-item ">
-					<a href="<?php echo site_url('dashboard')?>">
-						<span class="badge pull-right">X</span>
-						Kompetisi diikuti
-					</a>
-				</li>
-				<li class="list-group-item">
-					<a href="<?php echo site_url('dashboard/ditandai')?>">
-						<span class="badge pull-right">X</span>
-						Kompetisi ditandai
-					</a>
-				</li>
-				<li class="list-group-item">
-					<a href="<?php echo site_url('dashboard/saya')?>">
-						<span class="badge pull-right">X</span>
-						Kompetisi saya
-					</a>
-				</li>
-			</ul>
+			<?php $this->load->view('dashboard/menu');?>
 		</div>
 
-		<div class="col-md-7">
+		<div style="background-color:#fff" class="col-md-7">
 			<h3>Pasang Kompetisi</h3>
 			<p>tanda *, adalah form yang wajib diisi</p>
 			<form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="<?php echo site_url('process/proc_public/edit')?>">
@@ -139,9 +119,13 @@
 				<div class="form-group">
 					<label for="deskripsilengkap" class="col-lg-2 control-label">* Deskripsi Lengkap</label>
 					<div class="col-lg-10">
+						<?php
+						$break = array('</br>','<br/>','<br>');
+						$detail = str_replace($break, "\n", $view['konten']);
+						?>
 						<h6>deskripsi meliputi syarat dan ketentuan kompetisi</h6>
 						<h6>dan atau contact person / informasi lebih lanjut</h6>
-						<textarea name="deskripsi" style="height:200px" class="form-control" id="deskripsilengkap"  required><?php echo $view['konten']?></textarea>
+						<textarea name="deskripsi" style="height:200px" class="form-control" id="deskripsilengkap"  required><?php echo $detail;?></textarea>
 					</div>
 				</div>
 				<div class="form-group">

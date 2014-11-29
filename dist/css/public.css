@@ -29,7 +29,7 @@
     .poster-tile:hover .poster-title{
     	display: block
     }
-
+    .white-text a{color:#fff;}
     html {
     	font-family: 'Open Sans', sans-serif;
     }

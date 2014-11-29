@@ -13,7 +13,7 @@
 				</div>
 				<div class="clear"></div>
 				<div class="row">
-					<a  href="<?php echo site_url('jelajah')?>"><div  class="btn-white col-md-offset-3 col-md-3"><p>jelajah kompetisi</p><span style="float:right" class="glyphicon glyphicon-search"></span></div></a>
+					<a  href="<?php echo site_url('start/kompetisi/jelajah')?>"><div  class="btn-white col-md-offset-3 col-md-3"><p>jelajah kompetisi</p><span style="float:right" class="glyphicon glyphicon-search"></span></div></a>
 					<div style="margin : 0 5px 0 5px"></div>
 					<a href="<?php echo site_url('pasangkompetisi')?>"><div class="btn-white col-md-3"><p>pasang kompetisi</p><span style="float:right" class="glyphicon glyphicon-plus"></span></div></a>
 				</div>

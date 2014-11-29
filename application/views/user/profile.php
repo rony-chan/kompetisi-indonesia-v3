@@ -6,7 +6,7 @@
 } ?>
 class="profile">
 <div class="container">
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<h2><?php echo $detuser['fullname']?></h2>
 		<p>"<?php echo $detuser['moto']?>"</p>
 	</div>
@@ -24,8 +24,14 @@ class="profile">
 	</div>
 	<div class="col-md-2">
 		<center>
-			<h3>0</h3>	
+			<h3><?php echo $menang?></h3>	
 			<p>Menang</p>
+		</center>
+	</div>
+	<div class="col-md-2">
+		<center>
+			<h3><?php echo number_format($hadiah['hadiah'])?></h3>	
+			<p>Rp</p>
 		</center>
 	</div>
 </div>

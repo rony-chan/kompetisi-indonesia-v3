@@ -61,14 +61,6 @@
 	}
 </script>
 <script type"text/javascript" src="<?php echo base_url('dist/tinymce/js/tinymce/tinymce.min.js')?>"></script>
-<script type="text/javascript">
-	tinymce.init({
-		selector:"textarea#deskripsilengkap",
-		height:400,
-		menubar : false,
-		plugins:["image"]
-	});
-</script>
 </head>
 
 
@@ -104,10 +96,16 @@
 										<div class="dropdown pull-right">
 											<a data-toggle="dropdown" href="#"><img style="margin-right:5px;width:40px;height:40px" src="https://graph.facebook.com/<?php $this->session->userdata('oauth_id'); ?>/picture?return_ssl_resources=true" alt="kompetisi indonesia user"/><?php $this->session->userdata('username'); ?><span class="caret"></span></a>
 											<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+<<<<<<< HEAD
 												<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/profile/'.$username); ?>" >View Profile</a></li>
 												<li style="width:100%;padding:0"><a href="<?php echo site_url('dashboard'); ?>" >Dasbor</a></li>
 												<li style="width:100%;padding:0"><a href="<?php echo site_url('dashboard/profile'); ?>" >Edit Profil</a></li>
 												<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/logout'); ?>" >Logout</a></li>
+=======
+												<li style="width:100%;padding:0"><a href="'.site_url('publik/profile/'.$username).'" >View Profile</a></li>
+												<li style="width:100%;padding:0"><a href="'.site_url('dashboard').'" >Dasbor</a></li>												
+												<li style="width:100%;padding:0"><a href="'.site_url('publik/logout').'" >Logout</a></li>
+>>>>>>> 0e894e918c7d19c9b9543f71fa2e00ab38f4f94a
 											</ul>
 										</div>
 									</li></a>';
