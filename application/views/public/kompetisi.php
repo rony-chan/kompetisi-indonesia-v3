@@ -193,46 +193,90 @@ function giveRate(x){
 
 				<div class="tab-content">
 					<div class="tab-pane active" id="komentarnya">
-						<h4>Total 34 Komentar</h4>
-						<div class="komentar">
-							<div class="row col-md-12">
-								<div class="col-md-2">
-									<img style="width:100%" src="#" style="width:100%" />
+						<h4>Total <?php echo $count_komentar;?> Komentar</h4>
+						<?php foreach($komentar as $komen):?>
+							<div class="komentar">
+								<?php
+									//manage username
+								if($komen['username'] == $view['author']){
+										$username = 'Penyelenggara :: '.$komen['username']; //jika yang komentar adalah penyelenggara kompetisi
+									} else {
+										$username = $komen['username']; //jika yang komen adalah peserta
+									}
+									//manage profil picture
+									if(!empty($komen['provider'])){//login menggunakan provider
+										//cek login dengan apa
+										switch ($komen['provider']) {
+											case 'facebook':
+											$pp = 'https://graph.facebook.com/'.$komen['oauth_id'].'/picture?width=9999';
+											break;
+
+											case 'telkomid':
+												# code...
+											break;
+											
+											default:
+												$pp = base_url('images/avatar3.png');//default profile picture
+												break;
+											}
+										}else{
+										$pp = base_url('images/avatar3.png');//default profile picture
+									}
+									?>
+									<div class="row col-md-12">
+										<div class="col-md-2">
+											<img style="width:100%" src="<?php echo $pp;?>" style="width:100%" />
+										</div>
+										<div class="col-md-10">
+											<!-- letak komentar -->									
+											<p><strong><a href="<?php echo site_url('publik/profile/'.$komen['username']);?>"><?php echo $username;?></a></strong> <small><?php echo $komen['waktu'];?></small></p>
+											<p><?php echo $komen['komentar']?></p>
+										</div>
+									</div>
+								</div>
+							<?php endforeach;?>
+							<!-- balas komentar -->
+							<?php if(!empty($this->session->userdata('id_user'))) { ?>
+							<div id="komentar" class="komentar">
+								<div class="row col-md-12">
+									<div class="col-md-2">
+										<?php
+										//profile picture saya
+										if(!empty($this->session->userdata('oauth_provider'))){//login menggunakan provider
+										//cek login dengan apa
+											switch ($this->session->userdata('oauth_provider')) {
+												case 'facebook'://facebook
+												$ppsaya = 'https://graph.facebook.com/'.$this->session->userdata('oauth_id').'/picture?width=9999';
+												break;
+
+												case 'telkomid'://telkom id
+												# code...
+												break;
+												
+												default:
+												$ppsaya = base_url('images/avatar3.png');//default profile picture
+												break;
+											}
+										}else{
+										$ppsaya = base_url('images/avatar3.png');//default profile picture
+									}
+									?>
+									<img style="width:100%" src="<?php echo $ppsaya;?>" style="width:100%" />
 								</div>
 								<div class="col-md-10">
-									<!-- letak komentar -->
-									<p><strong><a href="#"></a></strong> <small>23 Januari 2014 12:09</small></p>
-									<p>Apakah yang harus saya lakukan untuk verifikasi data peserta saya</p>
-								</div>
-							</div>
-						</div>
-						<div class="komentar">
-							<div class="row col-md-12">
-								<div class="col-md-2">
-									<img style="width:100%" src="#" style="width:100%" />
-								</div>
-								<div class="col-md-10">
-									<!-- letak komentar -->
-									<p><strong><a href="#"></a></strong> <small>23 Januari 2014 12:09</small></p>
-									<p>Apakah yang harus saya lakukan untuk verifikasi data peserta saya</p>
-								</div>
-							</div>
-						</div>
-						<!-- balas komentar -->
-						<div class="komentar">
-							<div class="row col-md-12">
-								<div class="col-md-2">
-									<img style="width:100%" src="#" style="width:100%" />
-								</div>
-								<div class="col-md-10">
+
 									<!-- form balas komentar -->
-									<form action="#" method="POST" class="form">
-										<textarea style="width:100%" class="form-control" placeholder="ada pertanyaan masukan disini"></textarea>
+									<form action="<?php echo site_url('kompetisi/add_komentar');?>" method="POST" class="form">
+										<textarea name="input_komentar" style="width:100%" class="form-control" placeholder="ada pertanyaan masukan disini"></textarea>
+										<input type="hidden" name="id_kompetisi" value="<?php echo $this->uri->segment(3);?>">
 										<button style="margin-top:5px;float-right"  class="btn btn-default" type="submit" >Komentar</button>
 									</form>
 								</div>
 							</div>
 						</div>
+						<?php } else { ?>
+						<div id="komentar" class="komentar" style="color:gray">Silahkan <a href="#login" data-toggle="modal">login</a> untuk berkomentar</div>
+						<?php } ?>
 					</div>
 					<div class="tab-pane" id="facebook">
 						<!--FB Comment-->
