@@ -102,21 +102,23 @@
 								<a href="#" >
 									<li style="padding:0 0 0 10px">			
 										<div class="dropdown pull-right">
-											<a data-toggle="dropdown" href="#"><img style="margin-right:5px;width:40px;height:40px" src="https://graph.facebook.com/<?php $this->session->userdata('oauth_id'); ?>/picture?return_ssl_resources=true" alt="kompetisi indonesia user"/><?php $this->session->userdata('username'); ?><span class="caret"></span></a>
+											<a data-toggle="dropdown" href="#">
+											<?php if (empty($this->session->userdata('oauth_id'))): ?>
+
+											<img style="margin-right:5px;width:40px;height:40px" src="<?php echo base_url('images/avatar3.png'); ?>" alt="kompetisi indonesia user"/>
+
+											<?php else: ?>
+												
+											<img style="margin-right:5px;width:40px;height:40px" src="https://graph.facebook.com/<?php $this->session->userdata('oauth_id'); ?>/picture?return_ssl_resources=true" alt="kompetisi indonesia user"/>
+											<?php endif; ?>
+											<?php echo $this->session->userdata('username'); ?><span class="caret"></span></a>
 											<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-<<<<<<< HEAD
-												<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/profile/'.$username); ?>" >View Profile</a></li>
-												<li style="width:100%;padding:0"><a href="<?php echo site_url('dashboard'); ?>" >Dasbor</a></li>
-												<li style="width:100%;padding:0"><a href="<?php echo site_url('dashboard/profile'); ?>" >Edit Profil</a></li>
+												<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/profile/'.$username) ?>" >View Profile</a></li>
+												<li style="width:100%;padding:0"><a href="<?php echo site_url('dashboard'); ?>" >Dasbor</a></li>												
 												<li style="width:100%;padding:0"><a href="<?php echo site_url('publik/logout'); ?>" >Logout</a></li>
-=======
-												<li style="width:100%;padding:0"><a href="'.site_url('publik/profile/'.$username).'" >View Profile</a></li>
-												<li style="width:100%;padding:0"><a href="'.site_url('dashboard').'" >Dasbor</a></li>												
-												<li style="width:100%;padding:0"><a href="'.site_url('publik/logout').'" >Logout</a></li>
->>>>>>> 0e894e918c7d19c9b9543f71fa2e00ab38f4f94a
 											</ul>
 										</div>
-									</li></a>';
+									</li></a>
 								<?php else: ?>
 									<li><a href="#login" data-toggle="modal">Login</a></li>
 								<?php endif; ?>
@@ -167,7 +169,7 @@
 										<h3 style="width:50%"> <span class="glyphicon glyphicon-user"> </span><br/> Pasang dan Manajemen Kompetisi</h3><br/><br/>
 									</span>
 
-							<!-- <span class="col-md-6">
+							<span class="col-md-6">
 								<form method="post" action="<?php echo site_url('publik/login')?>" role="form">
 								  <div class="form-group">
 								    <label for="exampleInputEmail1">Username</label>
@@ -184,23 +186,20 @@
 								  </div>
 								  <input  type="submit" class="btn btn-default" value="Log in"/>
 								 </form>
-<<<<<<< HEAD
-=======
-								</span> -->
+							</span>
 
 								<span class="col-md-6">
 									<p>login via :</p>
 									<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="http://kompetisiindonesia.com/images/icon/fb-20x20.png" alt="facebook login"/></span>Facebook</a>
 									<a class="btn-connect g"  href=""><span style="float:left"></span>Telkom ID</a>
->>>>>>> 5e0e37aea7b7e02086de2b5f4a5d0a51bb281cbf
 								</span>
- -->
-								<span class="col-md-6">
+
+								<!-- <span class="col-md-6">
 											<p>login via :</p>
 											<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/fb-20x20.png'); ?>" alt="facebook login"/></span>Facebook</a>
 											<a class="btn-connect twitter"  href="<?php echo site_url('auth/twitter')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/twitter-20x20.png'); ?>" alt="twitter login"/></span>Twitter</a>
 											<a class="btn-connect g"  href="<?php echo site_url('auth/twitter')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/g-20x20.png'); ?>" alt="google+ login"/></span>Google+</a>
-										</span>
+										</span> -->
 
 							</center>
 						</span>
