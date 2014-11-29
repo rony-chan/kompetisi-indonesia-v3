@@ -59,6 +59,14 @@
 	function not_ready(){
 		alert('Sistem Belum Siap');
 	}
+	// bootstrap tab
+	$(document).ready(function(){
+		$('#komentarki a').click(function (e) {
+		e.preventDefault()
+		$(this).tab('show')
+		})
+	});
+	
 </script>
 <script type"text/javascript" src="<?php echo base_url('dist/tinymce/js/tinymce/tinymce.min.js')?>"></script>
 </head>
@@ -113,7 +121,7 @@
 									<li><a href="#login" data-toggle="modal">Login</a></li>
 								<?php endif; ?>
 								<li><a href="<?php echo site_url('pasangkompetisi')?>">Pasang</a></li>
-								<li><a href="<?php echo site_url('jelajah')?>">Jelajah</a></li>
+								<li><a href="<?php echo site_url('start/kompetisi/jelajah')?>">Jelajah</a></li>
 								<li><a href="<?php echo site_url('publik/read/TVRZPQ/Testimoni')?>">Testimoni</a></li>
 								<li><a href="<?php echo site_url('start/kompetisi/news')?>">News</a></li>
 								<li><a href="<?php echo site_url('publik/read/TWpBPQ/Bantuan')?>">Bantuan</a></li>
