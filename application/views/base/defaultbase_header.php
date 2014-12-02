@@ -170,9 +170,7 @@
 						<span class="col-md-12 login-via">
 							<center>
 								<span class="col-md-6">
-									<h3 style="width:50%"> <span class="glyphicon glyphicon-user"> </span><br/> Pasang dan Manajemen Kompetisi</h3><br/><br/>
-								</span>
-								<span class="col-md-6">
+									<!-- <h3 style="width:50%"> <span class="glyphicon glyphicon-user"> </span><br/> Pasang dan Manajemen Kompetisi</h3><br/><br/> -->
 									<form method="post" action="<?php echo site_url('publik/login')?>" role="form">
 										<div class="form-group">
 											<label for="exampleInputEmail1">Username</label>
@@ -182,17 +180,15 @@
 											<label for="exampleInputPassword1">Password</label>
 											<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
 										</div>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox"> Ingat saya
-											</label>
-										</div>
-										<input  type="submit" class="btn btn-default" value="Log in"/>
+										<input style="float:left"  type="submit" class="btn btn-default" value="Log in"/>
 									</form>
 								</span>
 								<span class="col-md-6">
+									
+								</span>
+								<span class="col-md-6">
 									<p>login via :</p>
-									<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="http://kompetisiindonesia.com/images/icon/fb-20x20.png" alt="facebook login"/></span>Facebook</a>
+									<a class="btn-connect fb"  href="<?php echo base_url('oauth/facebook.php')?>"><span style="float:left"><img src="<?php echo base_url('images/icon/fb-20x20.png') ?>" alt="facebook login"/></span>Facebook</a>
 									<a class="btn-connect g"  href=""><span style="float:left"></span>Telkom ID</a>
 								</span>
 								<!-- <span class="col-md-6">
